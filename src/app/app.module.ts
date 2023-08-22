@@ -3,18 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TableauBordComponent } from './tableau-bord/tableau-bord.component';
-import { HistoriqueMesuresComponent } from './historique-mesures/historique-mesures.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TableauBordComponent,
-    HistoriqueMesuresComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
