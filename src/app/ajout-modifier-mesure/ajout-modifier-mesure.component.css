@@ -1,0 +1,25 @@
+#form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 5px;
+}
+#lastcol{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: 10px;
+}
+.mydiv{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+#matback{
+    background-color: #FFECD9;
+}
+#titre{
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #FFECD9;
+
+}
