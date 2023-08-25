@@ -1,0 +1,34 @@
+/* .div{
+    box-sizing: border-box;
+    margin-top: 0;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    box-sizing: border-box;
+}
+h3{
+    
+    z-index: 2;
+    position: absolute;
+    text-align: center;
+    font-family: Georgia;
+    margin: 0 auto;
+    left: 0%;
+    right: 0%;
+    top: 50%;
+    color: white;
+    width: 70%;
+} */
+.imgcontainer{
+    box-sizing: border-box;
+    background-color: #FFECD9;
+
+}
+.imgcontainer img{
+    height: 100vh;
+    width: 100%;
+    border-radius: 300px 0 0 0;
+    border-right: #FFECD9 solid 5px ;
+    border-top: #FFECD9 solid 5px ;
+    border-style: groove;
+}

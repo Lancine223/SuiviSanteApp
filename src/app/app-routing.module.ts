@@ -8,6 +8,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 
 const routes: Routes = [
   { path: '', component: AccueilComponent, },
+  { path: 'accueil', component: AccueilComponent, },
  { path: 'historique', component: HistoriqueMesuresComponent },
  { path: 'tableaub', component: TableauBordComponent }
 ];
