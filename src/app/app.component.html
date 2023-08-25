@@ -1,18 +1,85 @@
-<div class="app">
-  <header>
-  <section>
-  <h1>{{ title }}</h1>
-  <h2></h2>
-  </section>
-  <nav>
-  <ul>
-  <li><a routerLink="">Home</a></li>
-  <li><a routerLink="/historique">historique</a></li>
-  <li><a routerLink="/tableaub">tableaub</a></li>
-  </ul>
-  </nav>
-  </header>
-  <main>
-  <router-outlet></router-outlet>
-  </main>
- </div>
+<!--
+ <div class="container-fluid" id="maindata">
+  <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " id="bgc">
+          <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+
+
+            <div class="item"><a routerLinkActive="active" routerLink="" class="nav-link align-middle px-0">
+              <i class="fa-solid fa-house"></i> <span class="ms-1 d-none d-sm-inline">Accueil</span>
+              </a>
+            </div>
+            <div class="item">
+              <a routerLinkActive="active" routerLink="/historique" class="nav-link align-middle px-0">
+                <i class="fa-solid fa-list-ul"></i> <span class="ms-1 d-none d-sm-inline">Historique-Mesures</span>
+            </a>
+            </div>
+            <div class="item">
+              <a routerLinkActive="active" routerLink="/tableaub" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <i class="fa-solid fa-gauge"></i> <span class="ms-1 d-none d-sm-inline">Tableau de Bord</span> </a>
+            </div>
+              <hr>
+          </div>
+      </div>
+       <div class="col py-3">
+        <router-outlet></router-outlet>
+      </div> 
+      
+      <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0">
+        <router-outlet></router-outlet>
+      </div>
+      
+  </div>
+</div>        
+-->
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse pt-0">
+      <div class="position-sticky pt-3 sidebar-sticky d-flex flex-column flex-shrink-0">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+          <div class="grid"><img src="../assets/img/logo-suivisante.png" alt="logo" width="95%" ></div>
+        </a>
+        
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a  routerLinkActive="active" routerLink="/accueil" class="nav-link" aria-current="page" >
+              <i class="fa-solid fa-house"></i>
+              Accueil
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  routerLinkActive="active" routerLink="/historique" class="nav-link" aria-current="page" >
+              <i class="fa-solid fa-list-ul"></i>
+              Historique-Mesures
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  routerLinkActive="active" routerLink="/tableaub" class="nav-link" aria-current="page" >
+              <i class="fa-solid fa-chart-line"></i>
+              Tableau de bord
+            </a>
+          </li>
+          
+        </ul>
+        
+          <ul class="nav">
+            <li class="nav-item"><a class="nav-link p-1" href="#">
+              <img src="../assets/img/logo-suivisante.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            Admin
+          </a></li>
+          </ul>
+
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      
+      <router-outlet></router-outlet>
+        
+    </main>
+  </div>
+</div>
+
+<!---->
