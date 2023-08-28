@@ -1,6 +1,6 @@
 export class Mesure {
         public id: number;
-        public NomComplet: String;
+        public NomComplet: string;
         public date: Date;
         public poids: number;
         public taille: number;
@@ -8,7 +8,7 @@ export class Mesure {
         public pouls: number
     constructor(
         id: number,
-        NomComplet: String,
+        NomComplet: string,
         date: Date,
         poids: number,
         taille: number,

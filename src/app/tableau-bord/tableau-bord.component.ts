@@ -281,7 +281,7 @@ export class TableauBordComponent {
         }
       },
       subtitle: {
-        text: 'Visualisation',
+        text: 'SuiviSanteApp',
         align: 'left',
         style: {
           fontSize: '18px'

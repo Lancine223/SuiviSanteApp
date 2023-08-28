@@ -34,29 +34,14 @@ export class SuiviSanteServiceService {
   ajouterMesure(mesure: Mesure) {
     // Générez un nouvel ID pour la mesure (vous pouvez utiliser une logique plus complexe si nécessaire)
     //mesure.id = this.generateNewId();
+    mesure.id=this.mesures.length+1;
     this.mesures.push(mesure);
+    console.log(this.mesures.length);
      // Mise à jour de la liste des mesures et notification aux observateurs
     this.mesureSubject.next(this.mesures);
   }
-  getLastUsedId(): number {
-    if (this.mesures.length === 0) {
-      return 0; // Aucune mesure enregistrée, commencez par l'ID 1
-    }
-    
-    // Trouvez l'ID le plus élevé parmi les mesures existantes
-    const maxId = Math.max(...this.mesures.map(mesure => mesure.id), 0);
-    
-    return maxId;
-  }
+  
   // Les autres méthodes (modifierMesure, supprimerMesure, etc.) restent inchangées
-
-  private generateNewId(): number {
-    // Implémentez la logique pour générer un nouvel ID unique
-    // Par exemple, vous pouvez prendre le plus grand ID existant et ajouter 1
-    const existingIds = this.mesures.map(m => m.id);
-    const newId = Math.max(...existingIds) + 1;
-    return newId;
-  }
 
   // Méthode pour mettre à jour une mesure existante
   modifierMesure(mesure: Mesure) {
