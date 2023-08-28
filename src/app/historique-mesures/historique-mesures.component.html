@@ -34,7 +34,7 @@
     <!-- ID Column -->
     <ng-container matColumnDef="NomComplet">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Complet </th>
-      <td mat-cell *matCellDef="let row"> {{row.Nomcomplet}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.NomComplet}} </td>
     </ng-container>
     <!-- ID Column -->
     <ng-container matColumnDef="date">
@@ -57,13 +57,18 @@
     <!-- Name Column -->
     <ng-container matColumnDef="pressionArterielle">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Pression Arterielle </th>
-      <td mat-cell *matCellDef="let row"> {{row.pressionArterielle}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.pressionArterielle}}mmkg </td>
     </ng-container>
 
     <!-- Fruit Column -->
     <ng-container matColumnDef="pouls">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Pouls </th>
       <td mat-cell *matCellDef="let row"> {{row.pouls}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="imc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> IMC </th>
+      <td mat-cell *matCellDef="let row"> {{row.imc}} </td>
     </ng-container>
    
     <!-- Fruit Column -->

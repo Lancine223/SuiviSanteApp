@@ -83,6 +83,8 @@ export class TableauBordComponent {
   private poids:number[] = [] 
   private pressionArt:number[] = [];
   private pouls:number[] = [];
+  private jourD: string[]=[];
+  private nomp: string[]=[];
 
 
   
@@ -90,10 +92,12 @@ export class TableauBordComponent {
   chartLabel = ["poids", "Pression Arterielle","Utilisateurs"]
   constructor(private service:SuiviSanteServiceService) {
     this.suiviSanteService = service;
-    this.suiviSanteService.getMesures().forEach((element: { poids: number; pressionArterielle: number; pouls: number; }) => {
+    this.suiviSanteService.getMesures().forEach((element: { poids: number; pressionArterielle: number; pouls: number; date:string, NomComplet:string }) => {
         this.poids.push(element.poids);
         this.pressionArt.push(element.pressionArterielle);
-        this.pouls.push(element.pouls)
+        this.pouls.push(element.pouls);
+        this.jourD.push(element.date);
+        this.nomp.push(element.NomComplet);
 
 
     });
@@ -244,7 +248,8 @@ export class TableauBordComponent {
         color: "#E3E7FC"
         // color: "#E3E7FC"
       }],
-      labels: ["Janv","Féb","Mars","Avr","Mai","Juin","Juil","Aout","Sep","Oct","Nov","Dec"],
+      labels: this.jourD,
+      // labels: ["Janv","Féb","Mars","Avr","Mai","Juin","Juil","Aout","Sep","Oct","Nov","Dec"],
       xaxis: {
         labels: {
           show: false

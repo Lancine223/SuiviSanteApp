@@ -29,11 +29,12 @@ export class AjoutModifierMesureComponent implements OnInit {
     this.mesureForm = this.formBuilder.group({
       id:'',
       NomComplet: ['', Validators.required ],
-      date: new Date(),
+      date: ['', Validators.required],
       poids:  [numberAttribute, Validators.required],
       taille: [numberAttribute, Validators.required],
-      pressionArterielle: ['', Validators.required],
+      pressionArterielle: [numberAttribute, Validators.required],
       pouls: [numberAttribute, Validators.required],
+      imc: ''
      
     });
   }
@@ -44,16 +45,15 @@ export class AjoutModifierMesureComponent implements OnInit {
   onSubmit() {
   
     if (this.mesureForm.valid) {
-      
        const mesure = this.mesureForm.value;
-       const i= this.lastUsedId+1;
-        mesure.id = this.lastUsedId+1;
+      //  const i= this.lastUsedId+1;
+      //   mesure.id = this.lastUsedId+1;
       //  console.log(mesure);
-      Swal.fire('Merci !...', 'Mesure Modifier avec succès!', 'success')
+      Swal.fire('Merci !...', 'Mesure Enregistrer avec succès!', 'success')
     
       
 
-      // // const nouvelleMesure: Mesure = this.mesureForm.value;
+      // const nouvelleMesure: Mesure = this.mesureForm.value;
       // if (this.data) {
       //   this.suiviSanteService
       //     .modifierMesure(this.data.id);

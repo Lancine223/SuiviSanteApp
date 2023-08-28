@@ -5,7 +5,8 @@ export class Mesure {
         public poids: number;
         public taille: number;
         public pressionArterielle: string;
-        public pouls: number
+        public pouls: number;
+        public imc: number;
     constructor(
         id: number,
         NomComplet: string,
@@ -13,7 +14,8 @@ export class Mesure {
         poids: number,
         taille: number,
         pressionArterielle: string,
-        pouls: number
+        pouls: number,
+        imc:number
       ) { 
         this.id = id;
         this.NomComplet = NomComplet;
@@ -21,7 +23,8 @@ export class Mesure {
         this.poids = poids;
         this.taille = taille;
         this.pressionArterielle = pressionArterielle;
-        this.pouls = pouls
+        this.pouls = pouls;
+        this.imc = imc
        }
     
 }
