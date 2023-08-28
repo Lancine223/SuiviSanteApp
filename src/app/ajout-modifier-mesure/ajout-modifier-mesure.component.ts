@@ -1,10 +1,12 @@
-import { Component, OnInit, numberAttribute } from '@angular/core';
+import { Component, OnInit, numberAttribute, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule , Validators } from '@angular/forms';
 import { Mesure } from '../mesure';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SuiviSanteServiceService } from '../suivi-sante-service.service';
+
 import { Router } from '@angular/router';
 import { generate } from 'rxjs';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-ajout-modifier-mesure',
@@ -21,12 +23,11 @@ export class AjoutModifierMesureComponent implements OnInit {
   
 
   constructor(
-    private formBuilder: FormBuilder,
-    private suiviSanteService: SuiviSanteServiceService, private router: Router
+    private formBuilder: FormBuilder, private _dialog: MatDialog, private suiviSanteService: SuiviSanteServiceService, private router: Router,@Inject(MAT_DIALOG_DATA) public data: Mesure[] | any
   ) {
   
     this.mesureForm = this.formBuilder.group({
-      id:[this.lastUsedId, Validators.required ],
+      id:'',
       NomComplet: ['', Validators.required ],
       date: new Date(),
       poids:  [numberAttribute, Validators.required],
@@ -37,18 +38,32 @@ export class AjoutModifierMesureComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    
+    // this.lastUsedId+1 = lastmodt;
   }
 
   onSubmit() {
+  
     if (this.mesureForm.valid) {
+      
        const mesure = this.mesureForm.value;
-       this.lastUsedId = 1;
-       mesure.id = this.lastUsedId;
-       console.log(mesure);
+       const i= this.lastUsedId+1;
+        mesure.id = this.lastUsedId+1;
+      //  console.log(mesure);
+      Swal.fire('Merci !...', 'Mesure Modifier avec succès!', 'success')
+    
       
 
-      // const nouvelleMesure: Mesure = this.mesureForm.value;
+      // // const nouvelleMesure: Mesure = this.mesureForm.value;
+      // if (this.data) {
+      //   this.suiviSanteService
+      //     .modifierMesure(this.data.id);
+      //     Swal.fire('Merci !...', 'Mesure Modifier avec succès!', 'success')
+          
+      // } else {
+      //   this.suiviSanteService.ajouterMesure(this.mesureForm.value);
+      //   Swal.fire('Merci...', 'Mesure enregistrer avec succès!', 'success');
+        
+      // }
     
 
     // Incrémentation de l'ID

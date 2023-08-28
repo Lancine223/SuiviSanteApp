@@ -42,13 +42,13 @@
 <div mat-dialog-content id="matback">
     <form  [formGroup]="mesureForm"  (ngSubmit)="onSubmit()">
         <div class="form-row-md-20" id="form">
-           <div class="form-group col-sm">
+           <!-- <div class="form-group col-sm">
             <label for="id">ID</label>
             <input type="number" class="form-control" id="id" placeholder="Id" formControlName="id" readonly>
-          </div>
+          </div> -->
           <div class="form-group col-sm" id="fullcol">
-            <label for="inputPassword4">Nom Complet</label>
-            <input type="text" class="form-control" id="poids" placeholder="75kg" formControlName="NomComplet">
+            <label for="NomComplet">Nom Complet</label>
+            <input type="text" class="form-control" id="NomComplet" placeholder="75kg" formControlName="NomComplet">
           </div>
           <div class="form-group col-sm">
             <label for="inputPassword4">Poids (en kg)</label>
@@ -62,7 +62,7 @@
             <label for="inputPassword4">Pression Artérielle</label>
             <input type="text" class="form-control" id="pressionArterielle" placeholder="18/24 mmkg" formControlName="pressionArterielle">
           </div>
-          <div class="form-group col-sm">
+          <div class="mydiv">
             <label for="inputPassword4">Pouls</label>
             <input type="number" class="form-control" id="pouls" placeholder="23" formControlName="pouls">
           </div>
@@ -72,9 +72,11 @@
             <input type="password" class="form-control" id="pouls" placeholder="Password"  formControlName="pouls">
              <input type="password" class="form-control" id="inputPassword4" placeholder="Password"  formControlName="pouls"></div> -->
         
-        <div class="mydiv">
-            <button type="submit" class="btn btn-primary" mt-10 [disabled]="mesureForm.invalid">Enregistrer</button>
+        <div class="form-group col-sm" id="grid">
+            <!-- <button type="submit" class="btn btn-primary" mt-10 [disabled]="mesureForm.invalid">Enregistrer</button> -->
             <!-- <button class="btn btn-secondary" mt-10>Retour</button> -->
+            <button class="btn btn-secondary" mt-10 mat-raised-button type="button" [mat-dialog-close]="false">Retour</button>
+            <button class="btn btn-primary" mt-10  mat-raised-button color="primary" type="submit" [disabled]="mesureForm.invalid">{{data ? 'Modifier': 'Enregistrer'}}</button>
         </div>
       </form>
 </div>
