@@ -1,30 +1,15 @@
-<!-- <div style="text-align:center">
-  <apx-chart
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [xaxis]="chartOptions.xaxis"
-    [title]="chartOptions.title"
-  ></apx-chart>
-  <apx-chart
-  [series]="chartOptionstwo.series"
-  [chart]="chartOptionstwo.chart"
-  [dataLabels]="chartOptionstwo.dataLabels"
-  [plotOptions]="chartOptionstwo.plotOptions"
-  [xaxis]="chartOptionstwo.xaxis"
-></apx-chart>
-</div> -->
-<div class="row">
+<!-- <div class="row">
   <div class="col-12">
       <div class="page-title-box">
           <div class="page-title-right">
               <div class="input-group">
-                  <input id="debut" onclick="this.showPicker()" value="2023-04-19" type="date" class="form-control">
+                  <input id="debut" onclick="this.showPicker()" [value]="toDay" type="date" class="form-control">
                   <input type="date" onclick="this.showPicker()" value="2023-04-19" class="form-control">
                   <div class="input-group-prepend">
                     <label for="debut" class="input-group-text rounded-0" id="">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
                           <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-                        </svg> Date debut & Fin </label>
+                        </svg> La date actuelle </label>
                   </div>
                   
                 </div>
@@ -33,9 +18,10 @@
       </div>
   </div>
 </div>
+-->
       <div class="row"> 
               <div class="row-title">
-                  <h4 class="m-0 mt-4">Objectifs</h4>
+                  <h4 class="m-0 mt-4">Tableau de bord</h4>
                   <hr class="mt-0">
               </div>
             <div class="col-lg-4">
@@ -68,7 +54,7 @@
             
               <div class="member d-flex justify-content-between align-items-center">
                   <div class="px-2">
-                      <h4>Revenus</h4>
+                      <h4>Poids</h4>
                       <span>475 000fcfa</span>
                       <span>400 pièces</span>
                   </div>
@@ -90,7 +76,7 @@
               <div class="card">
               <div class="member d-flex justify-content-between align-items-center">
                   <div class="px-2">
-                      <h4>Utilisateurs</h4>
+                      <h4>Pression Arterielle</h4>
                       <span>475 000fcfa</span>
                       <span>400 pièces</span>
                   </div>
@@ -133,205 +119,34 @@
             
             <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title">Les produits les plus vendus</h5>
+                    <h5 class="card-title">Les les Mesures Normale</h5>
                     
                 <div class="mb-3">
-                    <h6 class="mb-0">Jeans</h6>
+                    <h6 class="mb-0">Poids</h6>
                     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-bar" style="width: 70%"></div>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <h6 class="mb-0">Chemises</h6>
+                    <h6 class="mb-0">Taille</h6>
                     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-bar" style="width: 40%"></div>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <h6 class="mb-0">Ceintures</h6>
+                    <h6 class="mb-0">PressionArtérielle</h6>
                     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-bar" style="width: 60%"></div>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <h6 class="mb-0">Casquettes</h6>
+                    <h6 class="mb-0">Pouls</h6>
                     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-bar" style="width: 80%"></div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <h6 class=" mb-0">Divers</h6>
-                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar" style="width: 20%"></div>
-                    </div>
-                </div>
-               
                 </div>
             </div>
           </div>
         </div>
-                    <!--Visit tracking-->
-                    <div class="row">
-                        <div class="col-md-8">
-                          <div class="card">
-                            <div id="bar" class="card-body">
-                              <apx-chart
-                              [series]="optionDonut.series"
-                              [chart]="optionDonut.chart"
-                              [labels]="optionDonut.labels"
-                              [title]="optionDonut.title"
-                              [subtitle]="optionDonut.subtitle"
-                              [legend]="optionDonut.legend"
-                              [dataLabels]="optionDonut.dataLabels"
-                          ></apx-chart>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                         
-                                <div class="card">
-                                    <div class="d-flex card-header justify-content-between align-items-center">
-                                        <h4 class="header-title">Activités recentes</h4>
-                                        <div class="dropdown">
-                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="mdi mdi-dots-vertical"></i>
-                                            </a>
-                                            
-                                        </div>
-                                    </div>
-                    
-                                    <div class="card-body py-0 mb-3" data-simplebar="init" style="max-height: 403px;"><div class="simplebar-wrapper" style="margin: 0px -24px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px 24px;"> 
-                                        <div class="timeline-alt py-0">
-                                            <div class="timeline-item">
-                                                <i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
-                                                <div class="timeline-item-info">
-                                                    <a href="javascript:void(0);" class="text-info fw-bold mb-1 d-block">Vous avez vendu un article</a>
-                                                    <small>Kassim vient just d'achèter “Hyper - Tableau de bord Administrateur”!</small>
-                                                    <p class="mb-0 pb-2">
-                                                        <small class="text-muted">5 il y'a 5mn</small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                    
-                                            <div class="timeline-item">
-                                                <i class="mdi mdi-airplane bg-primary-lighten text-primary timeline-icon"></i>
-                                                <div class="timeline-item-info">
-                                                    <a href="javascript:void(0);" class="text-primary fw-bold mb-1 d-block">Product on the Bootstrap Market</a>
-                                                    <small>Mady Doucoure ajoouté
-                                                        <span class="fw-bold">Tableau de bord Administrateur</span>
-                                                    </small>
-                                                    <p class="mb-0 pb-2">
-                                                        <small class="text-muted">30 minutes ago</small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                    
-                                            <div class="timeline-item">
-                                                <i class="mdi mdi-microphone bg-info-lighten text-info timeline-icon"></i>
-                                                <div class="timeline-item-info">
-                                                    <a href="javascript:void(0);" class="text-info fw-bold mb-1 d-block">Robert Delaney</a>
-                                                    <small>Vous a envoyé
-                                                        <span class="fw-bold">"Comment allez vous ici?"</span>
-                                                    </small>
-                                                    <p class="mb-0 pb-2">
-                                                        <small class="text-muted">Il y'a deux heures</small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                    
-                                            <div class="timeline-item">
-                                                <i class="mdi mdi-upload bg-primary-lighten text-primary timeline-icon"></i>
-                                                <div class="timeline-item-info">
-                                                    <a href="javascript:void(0);" class="text-primary fw-bold mb-1 d-block">Audrey Tobey</a>
-                                                    <small>Photo uploadé
-                                                        <span class="fw-bold">"Error.jpg"</span>
-                                                    </small>
-                                                    <p class="mb-0 pb-2">
-                                                        <small class="text-muted">Il y'a 14 heures</small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                    
-                                            <div class="timeline-item">
-                                                <i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
-                                                <div class="timeline-item-info">
-                                                    <a href="javascript:void(0);" class="text-info fw-bold mb-1 d-block">You sold an item</a>
-                                                    <small>Nimaga vients juste d'achèter “Hyper - Tableau de bord Administrateur”!</small>
-                                                    <p class="mb-0 pb-2">
-                                                        <small class="text-muted">Il y'a 16 heures</small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                    
-                                            <div class="timeline-item">
-                                                <i class="mdi mdi-airplane bg-primary-lighten text-primary timeline-icon"></i>
-                                                <div class="timeline-item-info">
-                                                    <a href="javascript:void(0);" class="text-primary fw-bold mb-1 d-block">Product on the Bootstrap Market</a>
-                                                    <small>Ibrahima Sy a ajouté
-                                                        <span class="fw-bold">Tableau de bord Administrateur</span>
-                                                    </small>
-                                                    <p class="mb-0 pb-2">
-                                                        <small class="text-muted">2Il y'a deux heures</small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                    
-                                            <div class="timeline-item">
-                                                <i class="mdi mdi-microphone bg-info-lighten text-info timeline-icon"></i>
-                                                <div class="timeline-item-info">
-                                                    <a href="javascript:void(0);" class="text-info fw-bold mb-1 d-block">Robert Delaney</a>
-                                                    <small>Vous a envoyé
-                                                        <span class="fw-bold">"Comment allez vous ici?"</span>
-                                                    </small>
-                                                    <p class="mb-0 pb-2">
-                                                        <small class="text-muted">2 days ago</small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end timeline -->
-                                    </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 753px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 215px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></div> <!-- end slimscroll -->
-                                </div>
-                                <!-- end card-->
-                            
-                        </div>
-                      </div>
-        <!--Visit tracking-->
-        <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div id="bar" class="card-body">
-                  <apx-chart
-                  [series]="visitsQuotidiennes.series"
-                  [chart]="visitsQuotidiennes.chart"
-                  [labels]="visitsQuotidiennes.labels"
-                  [title]="visitsQuotidiennes.title"
-                  [subtitle]="visitsQuotidiennes.subtitle"
-                  [legend]="visitsQuotidiennes.legend"
-                  [xaxis]="optionsLine.xaxis"
-                  [yaxis]="optionsLine.yaxis"
-                  [dataLabels]="visitsQuotidiennes.dataLabels"
-              ></apx-chart>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div id="bar" class="card-body">
-                      <apx-chart
-                      [series]="optionsLine.series"
-                      [chart]="optionsLine.chart"
-                      [labels]="optionsLine.labels"
-                      [title]="optionsLine.title"
-                      [legend]="optionsLine.legend"
-                      [xaxis]="optionsLine.xaxis"
-                      [yaxis]="optionsLine.yaxis"
-                      [dataLabels]="optionsLine.dataLabels"
-                  ></apx-chart>
-                    </div>
-                  </div>
-            </div>
-          </div>
-
-
- 
+                   

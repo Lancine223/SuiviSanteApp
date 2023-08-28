@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-//
+// 
 
 import {
   ChartComponent,
@@ -17,6 +17,7 @@ ApexStroke,
 ApexFill,
 ApexYAxis, ApexLegend
 } from "ng-apexcharts";
+import { SuiviSanteServiceService } from '../suivi-sante-service.service';
 //
 export type chartOptionstwo = {
   series: ApexAxisChartSeries;
@@ -61,6 +62,7 @@ export type chartOptions = {
 
 var sparklineData = [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46];
 var colorPalette = ['#475BE8','#E3E7FC',  '#FEB019', '#FF4560', '#775DD0'];
+
 //
 
 @Component({
@@ -74,13 +76,27 @@ export class TableauBordComponent {
   public chartOptions2!: Partial<chartOptions> | any;
   public monthlyEarningsOpt! : Partial<chartOptions> | any;
   public optionsBar !: Partial<chartOptions> | any;
-  public visitsQuotidiennes! : Partial<chartOptions> | any;
-  public optionsLine! : Partial<chartOptions> | any;
-  public optionDonut! : Partial<chartOptions> | any;
+  toDay= new Date();
 
-  chartLabel = ["Ventes", "Revenus","Utilisateurs"]
-  constructor() {
+  private suiviSanteService:SuiviSanteServiceService | any;
+ 
+  private poids:number[] = [] 
+  private pressionArt:number[] = [];
+  private pouls:number[] = [];
+
+
   
+
+  chartLabel = ["poids", "Pression Arterielle","Utilisateurs"]
+  constructor(private service:SuiviSanteServiceService) {
+    this.suiviSanteService = service;
+    this.suiviSanteService.getMesures().forEach((element: { poids: number; pressionArterielle: number; pouls: number; }) => {
+        this.poids.push(element.poids);
+        this.pressionArt.push(element.pressionArterielle);
+        this.pouls.push(element.pouls)
+
+
+    });
     this.chartOptions = {
       series: [70],
       
@@ -104,7 +120,7 @@ export class TableauBordComponent {
       },
       
       labels: [
-        "Ventes"
+        "Poids"
       ]
     };
     this.chartOptions1 = {
@@ -122,7 +138,7 @@ export class TableauBordComponent {
           }
         }
       },
-      labels: ["Revenus"]
+      labels: ["Pression Arterielle"]
     };
     this.chartOptions2 = {
       series: [20],
@@ -213,13 +229,20 @@ export class TableauBordComponent {
       },
       colors: colorPalette,
       series: [{
-        name: "Ventes",
-        data: [42, 52, 16, 55, 59, 51, 45, 32, 26, 33, 44, 51, 42, 56],
+        name: "Poids",
+        data:  this.poids, //[this.suivisanteService.getMesures()[0].poids, 52, 16, 55, 59, 51, 45, 32, 26, 33, 44, 51, 42, 56],
         color: "#475BE8",
       }, {
-        name: "Revenus",
-        data: [6, 12, 4, 7, 5, 3, 6, 4, 3, 3, 5, 6, 7, 4],
+        name: "Pression Arterielle",
+        data: this.pressionArt,// [6, 12, 4, 7, 5, 3, 6, 4, 3, 3, 5, 6, 7, 4],
+        color: "#F29A2E"
+        // color: "#E3E7FC"
+      }
+      , {
+        name: "Pouls",
+        data:this.pouls,// [6, 12, 4, 7, 5, 3, 6, 4, 3, 3, 5, 6, 7, 4],
         color: "#E3E7FC"
+        // color: "#E3E7FC"
       }],
       labels: ["Janv","Féb","Mars","Avr","Mai","Juin","Juil","Aout","Sep","Oct","Nov","Dec"],
       xaxis: {
@@ -251,14 +274,14 @@ export class TableauBordComponent {
        enabled : false
       },
       title: {
-        text: 'Monthly Sales',
+        text: 'Statistique',
         align: 'left',
         style: {
           fontSize: '18px'
         }
       },
       subtitle: {
-        text: '19 250 900F CFA',
+        text: 'Visualisation',
         align: 'left',
         style: {
           fontSize: '18px'
@@ -266,269 +289,9 @@ export class TableauBordComponent {
       }
     
     } 
-    
-    // donut (catégories)
-    this.optionDonut = {
-      chart: {
-          type: 'donut',
-          width: '100%',
-          height: 400
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      plotOptions: {
-        pie: {
-          customScale: 0.8,
-          donut: {
-            size: '75%',
-          },
-          offsetY: 20,
-        },
-        /*stroke: {
-          colors: undefined
-        }*/
-      },
-      colors: colorPalette,
-      title: {
-        text: 'Catégories',
-        style: {
-          fontSize: '18px'
-        }
-      },
-      series: [21, 23, 19, 14, 6],
-      labels: ['Habillement', 'Nourriture', 'Electroniques', 'Kitchen Utility', 'Gardening'],
-      legend: {
-        position: 'left',
-        offsetY: 80
-      }
-    }
+   
 
-    //LE TRAFIC
-    this.visitsQuotidiennes = {
-      chart: {
-        height: 340,
-        type: 'area',
-        zoom: {
-          enabled: false
-        },
-      },
-      stroke: {
-        curve: 'straight'
-      },
-      colors: colorPalette,
-      series: [
-        {
-          name: "Blog",
-          data: [{
-            x: 0,
-            y: 0
-          }, {
-            x: 4,
-            y: 5
-          }, {
-            x: 5,
-            y: 3
-          }, {
-            x: 9,
-            y: 8
-          }, {
-            x: 14,
-            y: 4
-          }, {
-            x: 18,
-            y: 5
-          }, {
-            x: 25,
-            y: 0
-          }]
-        },
-        {
-          name: "Social Media",
-          data: [{
-            x: 0,
-            y: 0
-          }, {
-            x: 4,
-            y: 6
-          }, {
-            x: 5,
-            y: 4
-          }, {
-            x: 14,
-            y: 8
-          }, {
-            x: 18,
-            y: 5.5
-          }, {
-            x: 21,
-            y: 6
-          }, {
-            x: 25,
-            y: 0
-          }]
-        },
-        {
-          name: "External",
-          data: [{
-            x: 0,
-            y: 0
-          }, {
-            x: 2,
-            y: 5
-          }, {
-            x: 5,
-            y: 4
-          }, {
-            x: 10,
-            y: 11
-          }, {
-            x: 14,
-            y: 4
-          }, {
-            x: 18,
-            y: 8
-          }, {
-            x: 25,
-            y: 0
-          }]
-        }
-      ],
-      fill: {
-        opacity: 1,
-      },
-      title: {
-        text: 'Visites quotidiennes',
-        align: 'left',
-        style: {
-          fontSize: '18px'
-        }
-      },
-     /* markers: {
-        size: 0,
-        style: 'hollow',
-        hover: {
-          opacity: 5,
-        }
-      },*/
-      tooltip: {
-        intersect: true,
-        shared: false,
-      },
-      xaxis: {
-        tooltip: {
-          enabled: false
-        },
-        labels: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        }
-      },
-      yaxis: {
-        tickAmount: 4,
-        max: 12,
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
-        labels: {
-          style: {
-            colors: '#78909c'
-          }
-        }
-      },
-      legend: {
-        show: false
-      }
-    }
-
-        // visite par moment (jour/nuit)
-          this.optionsLine = {
-          chart: {
-            height: 340,
-            type: 'line',
-            zoom: {
-              enabled: false
-            }
-          },
-         /* plotOptions: {
-            stroke: {
-              width: 4,
-              curve: 'smooth'
-            },
-          },*/
-          colors: colorPalette,
-          series: [
-            {
-              name: "Visit Jour",
-              data: trigoSeries(52, 20)
-            },
-            {
-              name: "Visit Nuit",
-              data: trigoSeries(52, 27)
-            },
-          ],
-          title: {
-            floating: false,
-            text: 'Clients',
-            align: 'left',
-            style: {
-              fontSize: '18px'
-            }
-          },
-          subtitle: {
-            text: '168,215',
-            align: 'center',
-            margin: 30,
-            offsetY: 40,
-            style: {
-              color: '#222',
-              fontSize: '24px',
-            }
-          },
-         /* markers: {
-            size: 0
-          },
-        */
-          grid: {
-        
-          },
-          xaxis: {
-            labels: {
-              show: false
-            },
-            axisTicks: {
-              show: false
-            },
-            tooltip: {
-              enabled: false
-            }
-          },
-          yaxis: {
-            tickAmount: 2,
-            labels: {
-              show: false
-            },
-            axisBorder: {
-              show: false,
-            },
-            axisTicks: {
-              show: false
-            },
-            min: 0,
-          },
-          legend: {
-            position: 'top',
-            horizontalAlign: 'left',
-            offsetY: -20,
-            offsetX: -30
-          }
-        
-        }
+   
         
   };
 
@@ -556,6 +319,7 @@ var randomizeArray = function (arg:any)  {
     }
   
     return data;
-  }
+  } 
+
   
   
