@@ -21,14 +21,35 @@ h3{
 } */
 .imgcontainer{
     box-sizing: border-box;
-    background-color: #FFECD9;
+    background-color: #F29A2E;
 
 }
 .imgcontainer img{
+    position: relative;
     height: 100vh;
     width: 100%;
     border-radius: 300px 0 0 0;
-    border-right: #FFECD9 solid 5px ;
-    border-top: #FFECD9 solid 5px ;
+    border-right: #F29A2E solid 5px ;
+    border-top: #F29A2E solid 5px ;
     border-style: groove;
+}
+h3{
+    text-align: center;
+    position: absolute;
+    /* transform: translate(0); */
+    top: 65%;
+    left: 30%;
+    right: 30%;
+    box-shadow: #FFECD9;
+    background-color: black;
+    background-attachment: fixed;
+    filter: Alpha(opacity=30);-moz-opacity:0.30;opacity: 0.30;
+    color: #fff;
+    
+}
+.logosign{
+    color: blue;
+    font-weight: bolder;
+    opacity: 100%;
+    font-style: normal;
 }

@@ -40,33 +40,41 @@
 <!---->
 <div mat-dialog-title id="titre"> Ajouter Des Mesures</div>
 <div mat-dialog-content id="matback">
-    <form>
+    <form  [formGroup]="mesureForm"  (ngSubmit)="onSubmit()">
         <div class="form-row-md-20" id="form">
-          <div class="form-group col-sm">
-            <label for="inputEmail4">Date</label>
-            <input type="date" class="form-control" id="inputEmail4" placeholder="Email">
+           <div class="form-group col-sm">
+            <label for="id">ID</label>
+            <input type="number" class="form-control" id="id" placeholder="Id" formControlName="id" readonly>
+          </div>
+          <div class="form-group col-sm" id="fullcol">
+            <label for="inputPassword4">Nom Complet</label>
+            <input type="text" class="form-control" id="poids" placeholder="75kg" formControlName="NomComplet">
           </div>
           <div class="form-group col-sm">
-            <label for="inputPassword4">Password</label>
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+            <label for="inputPassword4">Poids (en kg)</label>
+            <input type="number" class="form-control" id="poids" placeholder="75kg" formControlName="poids">
           </div>
           <div class="form-group col-sm">
-            <label for="inputPassword4">Poids</label>
-            <input type="number" class="form-control" id="inputPassword4" placeholder="Password">
+            <label for="inputPassword4">Taille (en cm)</label>
+            <input type="number" class="form-control" id="taille" placeholder="175cm"  formControlName="taille">
           </div>
           <div class="form-group col-sm">
-            <label for="inputPassword4">Password</label>
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+            <label for="inputPassword4">Pression Artérielle</label>
+            <input type="text" class="form-control" id="pressionArterielle" placeholder="18/24 mmkg" formControlName="pressionArterielle">
+          </div>
+          <div class="form-group col-sm">
+            <label for="inputPassword4">Pouls</label>
+            <input type="number" class="form-control" id="pouls" placeholder="23" formControlName="pouls">
           </div>
         </div>
-        <div id="lastcol">
-            <label for="inputPassword4">Password</label>
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-        </div>
+        <!-- <div id="lastcol">
+            <label for="inputPassword4">Pouls</label>
+            <input type="password" class="form-control" id="pouls" placeholder="Password"  formControlName="pouls">
+             <input type="password" class="form-control" id="inputPassword4" placeholder="Password"  formControlName="pouls"></div> -->
         
         <div class="mydiv">
-            <button type="submit" class="btn btn-primary" mt-10>Enregistrer</button>
-            <button type="submit" class="btn btn-secondary" mt-10>Retour</button>
+            <button type="submit" class="btn btn-primary" mt-10 [disabled]="mesureForm.invalid">Enregistrer</button>
+            <!-- <button class="btn btn-secondary" mt-10>Retour</button> -->
         </div>
       </form>
 </div>
