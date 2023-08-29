@@ -1,89 +1,42 @@
-<!--- <div mat-dialog-title id="titre"> Ajouter Des Mesures</div>
-<div mat-dialog-content id="matback">
-    <form  [formGroup]="empform" (ngSubmit)="onFormsubmit()">
-        <div class="form-row-md-20" id="form">
 
-            <div class="form-group col-sm">
-              <label for="date">Date</label>
-              <input type="date" class="form-control" id="date" formControlName="date">
-            </div>
-
-            <div class="form-group col-sm">
-              <label for="poids">Poids</label>
-              <input type="number" class="form-control" id="poids" formControlName="poids">
-            </div>
-
-            <div class="form-group col-sm">
-              <label for="taille">Taille</label>
-              <input type="number" class="form-control" id="taille" placeholder="180cm" formControlName="taille">
-            </div>
-
-            <div class="form-group col-sm">
-              <label for="pressionArterielle">Pression Arterielle</label>
-              <input type="text" class="form-control" id="pressionArterielle" placeholder="18/180" formControlName="pressionArterielle">
-            </div>
-        
-            <div id="lastcol">
-                <label for="pouls">Pouls</label>
-                <input type="number" class="form-control" id="pouls" placeholder="16" formControlName="pouls">
-            </div>
-        
-            <div class="mydiv">
-                <button type="submit" class="btn btn-primary" mt-10>Enregistrer</button>
-                <button type="submit" class="btn btn-secondary" mt-10>Retour</button>
-            </div>
-          </div>
-      </form>
-
-</div> -->
-
-<!---->
 <div mat-dialog-title id="titre"> Ajouter Des Mesures</div>
 <div mat-dialog-content id="matback">
     <form  [formGroup]="mesureForm"  (ngSubmit)="onSubmit()">
         <div class="form-row-md-20" id="form">
-           <!-- <div class="form-group col-sm">
-            <label for="id">ID</label>
-            <input type="number" class="form-control" id="id" placeholder="Id" formControlName="id" readonly>
-          </div> -->
+          
           <div class="form-group col-sm">
             <label for="inputPassword4">Date</label>
-            <input type="date" class="form-control" id="date" placeholder="75kg" formControlName="date">
+            <input type="date" matInput class="form-control" id="date" placeholder="75kg" formControlName="date">
           </div>
           
           
           <div class="form-group col-sm">
             <label for="inputPassword4">Nom Complet</label>
-            <input type="text" class="form-control" id="NomComplet" placeholder="75kg" formControlName="NomComplet">
+            <input type="text" matInput class="form-control" id="NomComplet" placeholder="Nom et prenom" formControlName="NomComplet">
           </div>
           
           <div class="form-group col-sm">
             <label for="inputPassword4">Poids (en kg)</label>
-            <input type="number" class="form-control" id="poids" placeholder="75kg" formControlName="poids">
+            <input type="number" matInput class="form-control" id="poids" placeholder="75kg" formControlName="poids">
           </div>
           <div class="form-group col-sm">
             <label for="inputPassword4">Taille (en cm)</label>
-            <input type="number" class="form-control" id="taille" placeholder="175cm"  formControlName="taille">
+            <input type="number" matInput class="form-control" id="taille" placeholder="175cm"  formControlName="taille">
           </div>
           <div class="form-group col-sm">
             <label for="inputPassword4">Pression Artérielle</label>
-            <input type="number" class="form-control" id="pressionArterielle" placeholder="18/24 mmkg" formControlName="pressionArterielle">
+            <input type="number" matInput class="form-control" id="pressionArterielle" placeholder="18/24 mmkg" formControlName="pressionArterielle">
           </div>
           <div class="mydiv">
             <label for="inputPassword4">Pouls</label>
-            <input type="number" class="form-control" id="pouls" placeholder="23" formControlName="pouls">
+            <input type="number" matInput class="form-control" id="pouls" placeholder="23" formControlName="pouls">
           </div>
         </div>
-        <!-- <div id="lastcol">
-            <label for="inputPassword4">Pouls</label>
-            <input type="password" class="form-control" id="pouls" placeholder="Password"  formControlName="pouls">
-             <input type="password" class="form-control" id="inputPassword4" placeholder="Password"  formControlName="pouls"></div> -->
-        
+       
         <div class="form-group col-sm" id="grid">
-            <!-- <button type="submit" class="btn btn-primary" mt-10 [disabled]="mesureForm.invalid">Enregistrer</button> -->
-            <!-- <button class="btn btn-secondary" mt-10>Retour</button> -->
+            
             <button class="btn btn-secondary" mt-10 mat-raised-button type="button" [mat-dialog-close]="false">Retour</button>
-            <button class="btn btn-primary" mt-10  mat-raised-button color="primary" type="submit" [disabled]="mesureForm.invalid">{{data ? 'Modifier': 'Enregistrer'}}</button>
+            <button class="btn btn-primary" mt-10  mat-raised-button style="background-color: #26B08D;" type="submit" [disabled]="mesureForm.invalid">{{data ? 'Modifier': 'Enregistrer'}}</button>
         </div>
       </form>
 </div>

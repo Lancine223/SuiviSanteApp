@@ -49,12 +49,14 @@ body {
   
   .sidebar .nav-link {
     font-weight: 500;
-    color: #333;
+    color: #26B08D;
+    font-size: larger;
   }
   
   .sidebar .nav-link .feather {
     margin-right: 4px;
     color: #727272;
+    font-weight: bold;
   }
   
   /*.sidebar .nav-link.active {

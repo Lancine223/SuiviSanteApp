@@ -21,7 +21,7 @@ h3{
 } */
 .imgcontainer{
     box-sizing: border-box;
-    background-color: #F29A2E;
+    
 
 }
 .imgcontainer img{
@@ -38,9 +38,9 @@ h2{
     position: absolute;
     /* transform: translate(0); */
     top: 75%;
-    left: 35%;
-    right: 30%;
-    box-shadow: #FFECD9;
+    left: 20%;
+    right: 20%;
+    
     /* background-color: black;
     background-attachment: fixed;
     filter: Alpha(opacity=30);-moz-opacity:0.30;opacity: 0.30;
@@ -55,7 +55,7 @@ h2{
         top: 68%;
         left: 30%;
         right: 10%;
-        box-shadow: #FFECD9;
+        
         /* background-color: black;
         background-attachment: fixed;
         filter: Alpha(opacity=30);-moz-opacity:0.30;opacity: 0.30;
@@ -64,8 +64,12 @@ h2{
     }
   }
 .logosign{
-    color:  #F29A2E;
+    color:  #26B08D;
     font-weight: bolder;
     opacity: 100%;
     font-style: normal;
+}
+h2{
+    color: #fff;
+    text-shadow: 1px 1px 2px #26B08D, 0 0 1em black, 0 0 0.2em black;
 }

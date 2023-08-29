@@ -81,8 +81,8 @@
     z-index: 1500;
   }
   .nav .nav-item .active{
-    background-color: #fff!important;
-    color: #0D6EFD;
+    background-color: #26B08D!important;
+    color: #fff;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: larger;
@@ -90,7 +90,8 @@
     transform: scale(1.1);
   }
   #sidebarMenu{
-    background-color: #F29A2E !important;
+    background-color: #fff !important;
+    color: #26B08D;
     /* background-color: #FFECD9 !important; */
     
   }

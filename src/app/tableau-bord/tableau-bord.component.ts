@@ -85,6 +85,7 @@ export class TableauBordComponent {
   private pouls:number[] = [];
   private jourD: string[]=[];
   private nomp: string[]=[];
+  private togather: string[]=[];
 
 
   
@@ -92,126 +93,17 @@ export class TableauBordComponent {
   chartLabel = ["poids", "Pression Arterielle","Utilisateurs"]
   constructor(private service:SuiviSanteServiceService) {
     this.suiviSanteService = service;
-    this.suiviSanteService.getMesures().forEach((element: { poids: number; pressionArterielle: number; pouls: number; date:string, NomComplet:string }) => {
+    this.suiviSanteService.getMesures().forEach((element: { poids: number; pressionArterielle: number; pouls: number; date:string, NomComplet:string , togather:string}) => {
         this.poids.push(element.poids);
         this.pressionArt.push(element.pressionArterielle);
         this.pouls.push(element.pouls);
         this.jourD.push(element.date);
         this.nomp.push(element.NomComplet);
+        this.togather.push(element.NomComplet+'->'+element.date);
 
 
     });
-    this.chartOptions = {
-      series: [70],
-      
-      chart: {
-        type: "radialBar",        
-        width:150,
-      },
-      plotOptions: {
-        radialBar: {
-          
-          dataLabels:{
-            name : {
-              show:false
-            },
-          value : {
-            show: false
-          }
-      },
-        },
-        
-      },
-      
-      labels: [
-        "Poids"
-      ]
-    };
-    this.chartOptions1 = {
-      series: [40],
-      colors : ["#4CE13F"],
-      chart: {
-        type: "radialBar",
-        width:150
-      },
-      
-      plotOptions: {
-        radialBar: {
-          hollow: {
-            size: "40%"
-          }
-        }
-      },
-      labels: ["Pression Arterielle"]
-    };
-    this.chartOptions2 = {
-      series: [20],
-      colors : ["#F29A2E"],
-      chart: {
-        type: "radialBar",
-        width:150,
-      },
-      plotOptions: {
-        radialBar: {          
-          hollow: {
-            size: "80%"
-          }
-        }
-      },
-      fill:{
-        colors : ["#4CE13F"]
-      },
-      labels: ["Utilisateurss"]
-    };
-
-    this.monthlyEarningsOpt = {
-      chart: {
-        type: 'area',
-        height: 260,
-        background: '#eff4f7',
-        sparkline: {
-          enabled: true
-        },
-        offsetY: 20
-      },
-      stroke: {
-        curve: 'straight'
-      },
-      fill: {
-        type: 'solid',
-        opacity: 1,
-      },
-      series: [{
-        data: randomizeArray(sparklineData)
-      }],
-      xaxis: {
-        crosshairs: {
-          width: 1
-        },
-      },
-      yaxis: {
-        min: 0,
-        max: 130
-      },
-      colors: ['#dce6ec'],
-    
-      title: {
-        text: '$424,652',
-        offsetX: 30,
-        style: {
-          fontSize: '24px',
-         // cssClass: 'apexcharts-yaxis-title'
-        }
-      },
-      subtitle: {
-        text: 'Sales',
-        offsetX: 30,
-        style: {
-          fontSize: '14px',
-          //cssClass: 'apexcharts-yaxis-title'
-        }
-      }
-    };
+    // 
     this.optionsBar = {
       chart: {
         type: 'bar',
@@ -235,21 +127,20 @@ export class TableauBordComponent {
       series: [{
         name: "Poids",
         data:  this.poids, //[this.suivisanteService.getMesures()[0].poids, 52, 16, 55, 59, 51, 45, 32, 26, 33, 44, 51, 42, 56],
-        color: "#475BE8",
+        color: "#26B08D",
       }, {
         name: "Pression Arterielle",
         data: this.pressionArt,// [6, 12, 4, 7, 5, 3, 6, 4, 3, 3, 5, 6, 7, 4],
-        color: "#F29A2E"
+        color: "#FF0000"
         // color: "#E3E7FC"
       }
       , {
         name: "Pouls",
         data:this.pouls,// [6, 12, 4, 7, 5, 3, 6, 4, 3, 3, 5, 6, 7, 4],
-        color: "#E3E7FC"
+        color: "#0000FF"
         // color: "#E3E7FC"
       }],
-      labels: this.jourD,
-      // labels: ["Janv","Féb","Mars","Avr","Mai","Juin","Juil","Aout","Sep","Oct","Nov","Dec"],
+      labels: this.togather,
       xaxis: {
         labels: {
           show: false
@@ -302,29 +193,7 @@ export class TableauBordComponent {
 
   
 }
-var randomizeArray = function (arg:any)  {
-    var array = arg.slice();
-    var currentIndex = array.length, temporaryValue, randomIndex;
-  
-    while (0 !== currentIndex) {
-  
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-  
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-    return array;
-  }
-  function trigoSeries(cnt:any, strength:any) {
-    var data = [];
-    for (var i = 0; i < cnt; i++) {
-        data.push((Math.sin(i / strength) * (i / strength) + i / strength+1) * (strength*2));
-    }
-  
-    return data;
-  } 
+
 
   
   

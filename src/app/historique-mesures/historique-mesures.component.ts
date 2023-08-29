@@ -27,7 +27,8 @@ export class HistoriqueMesuresComponent implements OnInit{
 
   
   mesures: Mesure[] = [];
-  displayedColumns: string[] = ['id', 'NomComplet', 'date', 'poids', 'taille', 'pressionArterielle', 'pouls', 'imc','action'];
+  listeData:any = [];
+    displayedColumns: string[] = ['id', 'NomComplet', 'date', 'poids', 'taille', 'pressionArterielle', 'pouls', 'imc','action'];
   dataSource!: MatTableDataSource<Mesure>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -61,11 +62,6 @@ export class HistoriqueMesuresComponent implements OnInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     console.log(this.dataSource);
-    // Écoutez les mises à jour de la liste des mesures
-    this.suiviSanteService.getMesuresObservable().subscribe(updatedMesures => {
-    this.mesures = updatedMesures;
-    
-    });
 // Abonnez-vous à l'événement de mise à jour
 this.suiviSanteService.update$.subscribe(() => {
   // Mettez à jour vos données ici
@@ -79,32 +75,33 @@ private refreshData() {
   this.dataSource = new MatTableDataSource(this.mesures);
   this.dataSource.paginator = this.paginator;
   this.dataSource.sort = this.sort;
-  // Écoutez les mises à jour de la liste des mesures
-  this.suiviSanteService.getMesuresObservable().subscribe(updatedMesures => {
-  this.mesures = updatedMesures; });
 }
 
   OpenDialog(){
     this._dialog.open(AjoutModifierMesureComponent);
   }
-  openEditForm(data: any) {
+
+
+
+  openEditForm(data: Mesure[]) {
     const dialogRef = this._dialog.open(AjoutModifierMesureComponent, {
       data,
     });
 
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-          this.suiviSanteService.getMesures();
-        }
-      },
-    });
+    
   }
+  // remove(i:number):void {
+  //   // this.mesures = this.mesures.filter((item, index) => index !== rowid);
+  //   this.mesures.splice(i,1);
+  //   this.dataSource = new MatTableDataSource(this.mesures);
+  // }
 
-  deleteEmployee(id: number) {
-    this.suiviSanteService.supprimerMesure(id);
-        this.suiviSanteService.openSnackBar('Employee deleted!', 'done');
-        this.suiviSanteService.getMesures();
+    
+
+  deleteMesurelast(mesure: Mesure) {
+    this.suiviSanteService.supprimerMesure( mesure.id);
+    Swal.fire('Thank you...', 'Mesure Supprimer avec succès!', 'success')
+    
       
   }
 
@@ -134,30 +131,33 @@ private refreshData() {
       timer: 1500  
     })  
   }  
-  confirmBox(){  
+  confirmBox(i: number){  
     Swal.fire({  
-      title: 'Are you sure want to remove?',  
-      text: 'You will not be able to recover this file!',  
+      title: 'Êtes-vous sûr de vouloir supprimer?',  
+      text: 'Vous ne pourrez pas récupérer cette mesure!',  
       icon: 'warning',  
       showCancelButton: true,  
-      confirmButtonText: 'Yes, delete it!',  
-      cancelButtonText: 'No, keep it'  
+      confirmButtonText: 'Oui, supprimez-le !',  
+      cancelButtonText: 'Non, garde-le'  
     }).then((result) => {  
       if (result.value) {  
+        this.mesures.splice(i,1);
+        this.dataSource = new MatTableDataSource(this.mesures);
         Swal.fire(  
-          'Deleted!',  
-          'Your imaginary file has been deleted.',  
+          'Supprimer!',  
+          'Cette mesure a été supprimer.',  
           'success'  
         )  
       } else if (result.dismiss === Swal.DismissReason.cancel) {  
         Swal.fire(  
-          'Cancelled',  
-          'Your imaginary file is safe :)',  
+          'Annuler',  
+          'Votre mesure est en sécurité :)',  
           'error'  
         )  
       }  
     })  
   }
+
 }
   ///////TABLEAU
   
