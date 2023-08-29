@@ -6,6 +6,9 @@ import { BehaviorSubject, Subject  } from 'rxjs';
   providedIn: 'root'
 })
 export class SuiviSanteServiceService {
+  openSnackBar(arg0: string, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
 
   private mesures: Mesure[] = [];
   private mesureSubject = new BehaviorSubject<Mesure[]>([]);
@@ -35,8 +38,15 @@ export class SuiviSanteServiceService {
     // Générez un nouvel ID pour la mesure (vous pouvez utiliser une logique plus complexe si nécessaire)
     //mesure.id = this.generateNewId();
     mesure.id=this.mesures.length+1;
+    const convert= mesure.taille/100;
+    const produitTaille= convert*convert;
+    const lastaa=mesure.poids/produitTaille
+    // Arrondir l'IMC à une décimale
+    const imcArrondi: number = parseFloat(lastaa.toFixed(1));
+    mesure.imc=imcArrondi;
     this.mesures.push(mesure);
     console.log(this.mesures.length);
+    console.log(mesure);
      // Mise à jour de la liste des mesures et notification aux observateurs
     this.mesureSubject.next(this.mesures);
   }

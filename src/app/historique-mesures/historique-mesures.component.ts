@@ -27,7 +27,7 @@ export class HistoriqueMesuresComponent implements OnInit{
 
   
   mesures: Mesure[] = [];
-  displayedColumns: string[] = ['id', 'NomComplet', 'date', 'poids', 'taille', 'pressionArterielle', 'pouls','action'];
+  displayedColumns: string[] = ['id', 'NomComplet', 'date', 'poids', 'taille', 'pressionArterielle', 'pouls', 'imc','action'];
   dataSource!: MatTableDataSource<Mesure>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -103,6 +103,9 @@ private refreshData() {
 
   deleteEmployee(id: number) {
     this.suiviSanteService.supprimerMesure(id);
+        this.suiviSanteService.openSnackBar('Employee deleted!', 'done');
+        this.suiviSanteService.getMesures();
+      
   }
 
   simpleAlert(){  
