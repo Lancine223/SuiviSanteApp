@@ -46,28 +46,127 @@ export class AjoutModifierMesureComponent implements OnInit {
       onSubmit() {
         if (this.mesureForm.valid) {
           const mesure = this.mesureForm.value;
+      
           if (this.data) {
+            
+            if(mesure.date == null || mesure.date > new Date().getUTCDate()) {
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'La date est au future!',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }if(mesure.taille < 30 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'La taille doit être superieur ou égale à 30!',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }if(mesure.poids < 1 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'Le poids doit être superieur à 0!',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }if(mesure.pressionArterielle < 1 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'Le pression arterielle doit être superieur à 0!',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }if(mesure.pouls < 1 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'La pouls doit être superieur à 0!',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }
+          
+            if (mesure.date !== null && mesure.poids >=1 && mesure.taille >= 30 && mesure.pouls >= 1) {
+               
             this.suiviSanteService
-              .modifyMeasurement(this.data.id, this.mesureForm.value);
-              this.mesureForm.reset();
-              // Émettez un événement pour indiquer que les données ont été ajoutées
-              this.suiviSanteService.triggerUpdate();
-              Swal.fire('Merci !...', 'Mesure Modifier avec succès!', 'success')
-          } else {
-            this.suiviSanteService.ajouterMesure(mesure);
+            .modifyMeasurement(this.data.id, this.mesureForm.value);
             this.mesureForm.reset();
             // Émettez un événement pour indiquer que les données ont été ajoutées
             this.suiviSanteService.triggerUpdate();
-            Swal.fire('Merci !...', 'Mesure Enregistrer avec succès!', 'success')
+            Swal.fire('Merci !...', 'Mesure Modifier avec succès!', 'success')
+              }
+          } else {
+
+
+            if(mesure.date == null || mesure.date > new Date) {
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'La date est invalide!',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }if(mesure.taille < 30 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'La taille doit être superieur ou égale à 30 cm !',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }if(mesure.poids < 1 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'Le poids doit être superieur à 0!',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }if(mesure.pressionArterielle < 1 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'Le pression arterielle doit être superieur à 0!',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }if(mesure.pouls < 1 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'La pouls doit être superieur à 0!',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }
+          
+            if (mesure.date !== null && mesure.poids >=1 && mesure.taille >= 30 && mesure.pouls >= 1) {
+               
+              this.suiviSanteService.ajouterMesure(mesure);
+              this.mesureForm.reset();
+              // Émettez un événement pour indiquer que les données ont été ajoutées
+              this.suiviSanteService.triggerUpdate();
+              Swal.fire('Merci !...', 'Mesure Enregistrer avec succès!', 'success')
+              }
+          
+            
+               
+              // this.suiviSanteService.ajouterMesure(mesure);
+              // this.mesureForm.reset();
+              // // Émettez un événement pour indiquer que les données ont été ajoutées
+              // this.suiviSanteService.triggerUpdate();
+              // Swal.fire('Merci !...', 'Mesure Enregistrer avec succès!', 'success')
+              
+           
           }
         }
       }
       //ESSATIONS
-
-
-
-
-    
     }
     
   

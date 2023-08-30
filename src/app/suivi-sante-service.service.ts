@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Mesure } from './mesure';
 import { Observable, Subject  } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,12 @@ export class SuiviSanteServiceService {
     // Arrondir l'IMC à une décimale
     const imcArrondi: number = parseFloat(lastaa.toFixed(1));
     mesure.imc=imcArrondi;
-    this.mesures.push(mesure); 
+    this.mesures.push(mesure);
+    //
+    //
+    
+    //
+   
   }
   
   
@@ -57,6 +63,12 @@ export class SuiviSanteServiceService {
       // Arrondir l'IMC à une décimale
       const imcArrondi: number = parseFloat(lastaa.toFixed(1));
       mesure.imc=imcArrondi;
+      const dateauj=new Date();
+      const datefuture = dateauj.getDate()+1;
+      if(mesure.date.toLocaleString()>=datefuture.toLocaleString()) {
+        console.log("la date n'est pas correct")
+
+      }
       this.mesures[index] = mesure;
     }
   }

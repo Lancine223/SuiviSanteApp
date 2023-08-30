@@ -18,6 +18,7 @@ ApexFill,
 ApexYAxis, ApexLegend
 } from "ng-apexcharts";
 import { SuiviSanteServiceService } from '../suivi-sante-service.service';
+import { DatePipe } from '@angular/common';
 //
 export type chartOptionstwo = {
   series: ApexAxisChartSeries;
@@ -100,8 +101,6 @@ export class TableauBordComponent {
         this.jourD.push(element.date);
         this.nomp.push(element.NomComplet);
         this.togather.push(element.NomComplet+'->'+element.date);
-
-
     });
     // 
     this.optionsBar = {
@@ -119,7 +118,7 @@ export class TableauBordComponent {
       
       plotOptions: {
         bar: {
-          columnWidth: '55%',
+          columnWidth: '50%',
         }
       
       },

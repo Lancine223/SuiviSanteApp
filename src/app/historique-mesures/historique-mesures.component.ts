@@ -63,9 +63,10 @@ export class HistoriqueMesuresComponent implements OnInit{
     this.dataSource.sort = this.sort;
     console.log(this.dataSource);
 // Abonnez-vous à l'événement de mise à jour
-this.suiviSanteService.update$.subscribe(() => {
-  // Mettez à jour vos données ici
-  this.refreshData();
+    this.suiviSanteService.update$.subscribe(() => {
+    // Mettez à jour vos données ici
+    this.refreshData();
+    
 });   
 }
 private refreshData() {
