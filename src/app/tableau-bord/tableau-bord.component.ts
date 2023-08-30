@@ -1,9 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 
-// 
+//
 
 import {
-  ChartComponent,
   ApexAxisChartSeries,
   ApexNonAxisChartSeries,
   ApexPlotOptions,
@@ -79,15 +78,15 @@ export class TableauBordComponent {
   toDay= new Date();
 
   private suiviSanteService:SuiviSanteServiceService | any;
- 
-  private poids:number[] = [] 
+
+  private poids:number[] = []
   private pressionArt:number[] = [];
   private pouls:number[] = [];
   private jourD: string[]=[];
   private nomp: string[]=[];
 
 
-  
+
 
   chartLabel = ["poids", "Pression Arterielle","Utilisateurs"]
   constructor(private service:SuiviSanteServiceService) {
@@ -103,14 +102,14 @@ export class TableauBordComponent {
     });
     this.chartOptions = {
       series: [70],
-      
+
       chart: {
-        type: "radialBar",        
+        type: "radialBar",
         width:150,
       },
       plotOptions: {
         radialBar: {
-          
+
           dataLabels:{
             name : {
               show:false
@@ -120,9 +119,9 @@ export class TableauBordComponent {
           }
       },
         },
-        
+
       },
-      
+
       labels: [
         "Poids"
       ]
@@ -134,7 +133,7 @@ export class TableauBordComponent {
         type: "radialBar",
         width:150
       },
-      
+
       plotOptions: {
         radialBar: {
           hollow: {
@@ -152,7 +151,7 @@ export class TableauBordComponent {
         width:150,
       },
       plotOptions: {
-        radialBar: {          
+        radialBar: {
           hollow: {
             size: "80%"
           }
@@ -194,7 +193,7 @@ export class TableauBordComponent {
         max: 130
       },
       colors: ['#dce6ec'],
-    
+
       title: {
         text: '$424,652',
         offsetX: 30,
@@ -224,12 +223,12 @@ export class TableauBordComponent {
         offsetY:-30,
        // offsetX:430
       },
-      
+
       plotOptions: {
         bar: {
           columnWidth: '55%',
         }
-      
+
       },
       colors: colorPalette,
       series: [{
@@ -292,25 +291,25 @@ export class TableauBordComponent {
           fontSize: '18px'
         }
       }
-    
-    } 
-   
 
-   
-        
+    }
+
+
+
+
   };
 
-  
+
 }
 var randomizeArray = function (arg:any)  {
     var array = arg.slice();
     var currentIndex = array.length, temporaryValue, randomIndex;
-  
+
     while (0 !== currentIndex) {
-  
+
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
-  
+
       temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
@@ -322,9 +321,9 @@ var randomizeArray = function (arg:any)  {
     for (var i = 0; i < cnt; i++) {
         data.push((Math.sin(i / strength) * (i / strength) + i / strength+1) * (strength*2));
     }
-  
-    return data;
-  } 
 
-  
-  
+    return data;
+  }
+
+
+
