@@ -1,16 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Injectable } from '@angular/core';
+import { Component,Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SuiviSanteServiceService } from '../suivi-sante-service.service';
 import { Mesure } from '../mesure';
-import { MatIconButton } from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-//TABLE
 import { MatPaginator } from '@angular/material/paginator';
-import {MatSort, MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
 
 //TABLE
 import Swal from 'sweetalert2'; 
@@ -28,10 +23,12 @@ export class HistoriqueMesuresComponent implements OnInit{
   
   mesures: Mesure[] = [];
   listeData:any = [];
-    displayedColumns: string[] = ['id', 'NomComplet', 'date', 'poids', 'taille', 'pressionArterielle', 'pouls', 'imc','action'];
+  displayedColumns: string[] = ['id', 'NomComplet', 'date', 'poids', 'taille', 'pressionArterielle', 'pouls', 'imc','action'];
   dataSource!: MatTableDataSource<Mesure>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  
+  @Input() private colorgroupe: number[]=[];
 
   constructor(private _dialog: MatDialog, private suiviSanteService: SuiviSanteServiceService){
     
@@ -66,6 +63,7 @@ export class HistoriqueMesuresComponent implements OnInit{
     this.suiviSanteService.update$.subscribe(() => {
     // Mettez à jour vos données ici
     this.refreshData();
+    this.getColor();
     
 });   
 }
@@ -78,6 +76,34 @@ private refreshData() {
   this.dataSource.sort = this.sort;
 }
 
+getColor() {
+    const aa = this.suiviSanteService.getMesures();
+    
+    aa.forEach((element: { imc: number}) => {
+      // console.log(element.imc);
+      const color = element.imc;
+    if (color >= 18 && color <=25){
+      return '#26B08D';
+
+    }
+    else if (color < 18){
+      return 'orange';
+    }else if
+     (color > 25 && color < 30){
+      return 'orange';
+    }
+    else if (color >= 30 && color < 35) {
+      return 'orange';
+
+    }
+    else if (color >= 35 ){
+      return 'red';
+    }
+    return '#26B08D';
+    });
+  
+  
+}
   OpenDialog(){
     this._dialog.open(AjoutModifierMesureComponent);
   }
@@ -85,6 +111,7 @@ private refreshData() {
 
 
   openEditForm(data: Mesure[]) {
+    
     const dialogRef = this._dialog.open(AjoutModifierMesureComponent, {
       data,
     });
@@ -99,39 +126,32 @@ private refreshData() {
 
     
 
-  deleteMesurelast(mesure: Mesure) {
-    this.suiviSanteService.supprimerMesure( mesure.id);
-    Swal.fire('Thank you...', 'Mesure Supprimer avec succès!', 'success')
+  // simpleAlert(){  
+  //   Swal.fire('Hello Angular');  
+  // }  
     
-      
-  }
-
-  simpleAlert(){  
-    Swal.fire('Hello Angular');  
-  }  
-    
-  alertWithSuccess(){  
-    Swal.fire('Thank you...', 'You submitted succesfully!', 'success')  
-  }  
-  erroalert()  
-  {  
-    Swal.fire({  
-      icon: 'error',  
-      title: 'Oops...',  
-      text: 'Something went wrong!',  
-      footer: '<a href>Why do I have this issue?</a>'  
-    })  
-  }  
-  topend()  
-  {  
-    Swal.fire({  
-      position: 'top-end',  
-      icon: 'success',  
-      title: 'Your work has been saved',  
-      showConfirmButton: false,  
-      timer: 1500  
-    })  
-  }  
+  // alertWithSuccess(){  
+  //   Swal.fire('Thank you...', 'You submitted succesfully!', 'success')  
+  // }  
+  // erroalert()  
+  // {  
+  //   Swal.fire({  
+  //     icon: 'error',  
+  //     title: 'Oops...',  
+  //     text: 'Something went wrong!',  
+  //     footer: '<a href>Why do I have this issue?</a>'  
+  //   })  
+  // }  
+  // topend()  
+  // {  
+  //   Swal.fire({  
+  //     position: 'top-end',  
+  //     icon: 'success',  
+  //     title: 'Your work has been saved',  
+  //     showConfirmButton: false,  
+  //     timer: 1500  
+  //   })  
+  // }  
   confirmBox(i: number){  
     Swal.fire({  
       title: 'Êtes-vous sûr de vouloir supprimer?',  
@@ -152,7 +172,7 @@ private refreshData() {
       } else if (result.dismiss === Swal.DismissReason.cancel) {  
         Swal.fire(  
           'Annuler',  
-          'Votre mesure est en sécurité :)',  
+          'Votre mesure est en sécurité ',  
           'error'  
         )  
       }  

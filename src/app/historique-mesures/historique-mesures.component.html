@@ -1,15 +1,17 @@
 
-<button class="btn btn-primary" style="margin-right: 10px;margin-left: 10px;margin-top: 20px; background-color: #26B08D; margin-bottom: 20px;" (click)="OpenDialog()"> <i class="fa-solid fa-circle-plus"></i> Ajouter Mesure</button>
-<div class="row">  
-  
+<button class="btn btn-primary" style="margin-right: 10px;margin-left: 10px;margin-top: 20px; background-color: #26B08D" (click)="OpenDialog()"> <i class="fa-solid fa-circle-plus"></i> Ajouter Mesure</button>
+<div class="container-grid" id="boot" style="width: 100vw; box-sizing: border-box; height: 80vh;" *ngIf="!mesures.length">
+  <h1><marquee behavior="" direction="right">Aucune mesure n'est enregistrer !</marquee></h1>
+  <img src="../../assets/img/listaddimg.jpg" alt="" width="60%" height="100%">
+</div>
 
-
-<mat-form-field>
+<div *ngIf="mesures.length" style="margin-top: 20px;">
+<mat-form-field >
   <mat-label>Filtrer</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ecrire la valeur à chercher" #input>
 </mat-form-field>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" >
   <table mat-table [dataSource]="dataSource" matSort>
     <!-- ID Column -->
     <ng-container matColumnDef="id">
@@ -25,7 +27,7 @@
     <!-- ID Column -->
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-      <td mat-cell *matCellDef="let row"> {{row.date | date: 'dd MMMM yy'}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.date}} </td>
     </ng-container>
 
     <!-- ID Column -->
@@ -54,18 +56,23 @@
 
     <ng-container matColumnDef="imc">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> IMC </th>
-      <td mat-cell *matCellDef="let row"> {{row.imc}} </td>
+      <td mat-cell *matCellDef="let row" [ngStyle]="{color: getColor()}" style="font-weight: bold;"> {{row.imc}} </td>
     </ng-container>
    
     <!-- Fruit Column -->
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let row, let j = index;">
-        <button mat-icon-button btn-primary color="primary" (click)="openEditForm(row)">
-          <mat-icon color="black">edit</mat-icon>
+        <button mat-icon-button btn-primary color="primary" (click)="openEditForm(row)" style="border: none; background-color: #fff; margin-right: 5px; font-weight: bold;">
+          <!-- <mat-icon color="black">edit</mat-icon> -->
+          <i class="fa-solid fa-pencil"></i>
+          <!-- <mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon> -->
+
         </button>
-        <button mat-icon-button btn-warn color="red" focusable="false" (click)="confirmBox(j)">
-          <mat-icon color="red">delete</mat-icon>
+        <button mat-icon-button btn-warn focusable="false" (click)="confirmBox(j)" style="border: none; background-color: #fff; font-weight: bold;">
+          <!-- <mat-icon color="red">delete</mat-icon> -->
+          <!-- <mat-icon aria-hidden="false" aria-label="delete" svgIcon="thumbs-up"></mat-icon> -->
+          <i class="fa-solid fa-trash-can" style="color: red;"></i>
         </button>
       </td>
     </ng-container>
@@ -74,10 +81,13 @@
 
     <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">Aucune donnée correspondant au filtre <strong style="font-weight: bold; color: blue;">{{input.value}}</strong></td>
+      <td class="mat-cell" colspan="4">Aucune donnée correspondant au filtre <strong style="font-weight: bold; color: #26B08D;">{{input.value}}</strong></td>
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of mesures"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Selectionner page de mesure"></mat-paginator>
 </div>
+</div>
+
+
 

@@ -46,7 +46,6 @@ export class SuiviSanteServiceService {
    
   }
   
-  
   // Les autres méthodes (modifierMesure, supprimerMesure, etc.) restent inchangées
 
   // Méthode pour mettre à jour une mesure existante
@@ -55,7 +54,7 @@ export class SuiviSanteServiceService {
     const index = this.mesures.findIndex((meas) => meas.id === id);
 
     // Si l'indice est trouvé, mettez à jour la mesure
-    if (index !== -1) {
+      if (index !== -1) {
       // mesure.id=this.mesures.length+1;
       const convert= mesure.taille/100;
       const produitTaille= convert*convert;
@@ -72,27 +71,5 @@ export class SuiviSanteServiceService {
       this.mesures[index] = mesure;
     }
   }
-
-  // Méthode pour supprimer une mesure
-  supprimerMesure(id: number) {
-    this.mesures = this.mesures.filter(m => m.id !== id);
-    this.mesures.splice(id);
-    
-    
-  }
- 
-  
-  
-
-  deleteMesure(id: number): void {
-    // Trouvez l'index de la mesure à supprimer
-    const index = this.mesures.findIndex((mesure) => mesure.id === id);
-
-    if (index !== -1) {
-      // Supprimez la mesure de la liste
-      this.mesures.splice(index, 1);
-    }
-  }
-  
 
 }

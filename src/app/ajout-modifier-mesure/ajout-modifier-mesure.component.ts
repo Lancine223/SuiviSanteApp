@@ -1,13 +1,14 @@
 import { Component, OnInit, numberAttribute, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, MinLengthValidator, ReactiveFormsModule , Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, MaxLengthValidator, MaxValidator, Validators } from '@angular/forms';
 import { Mesure } from '../mesure';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SuiviSanteServiceService } from '../suivi-sante-service.service';
 
 import { Router } from '@angular/router';
 import { generate } from 'rxjs';
 import Swal from 'sweetalert2'; 
-import { getLocaleDateFormat } from '@angular/common';
+import { _isNumberValue } from '@angular/cdk/coercion';
+// import { formatDate, getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-ajout-modifier-mesure',
@@ -19,7 +20,7 @@ export class AjoutModifierMesureComponent implements OnInit {
   mesureForm: FormGroup;
   mesures: Mesure[] = [];
   lastUsedId: number=0; // Déclarez lastUsedId ici
-  
+  dt: any;
   
   
 
@@ -31,29 +32,36 @@ export class AjoutModifierMesureComponent implements OnInit {
       id:'',
       NomComplet: ['', Validators.required ],
       date: ['', Validators.required],
-      poids:  [numberAttribute, Validators.required],
-      taille: [numberAttribute, Validators.required],
-      pressionArterielle: [numberAttribute, Validators.required],
-      pouls: [numberAttribute, Validators.required],
+      poids:  ['', Validators.required],
+      taille: ['', Validators.required],
+      pressionArterielle: ['', Validators.required],
+      pouls: ['', Validators.required],
       imc: ''
      
     });
   }
   ngOnInit(): void {
+    
     this.mesureForm.patchValue(this.data);
   }
 
       onSubmit() {
         if (this.mesureForm.valid) {
           const mesure = this.mesureForm.value;
+          
       
           if (this.data) {
-            
-            if(mesure.date == null || mesure.date > new Date().getUTCDate()) {
+            // console.log("la date de mesure :"+mesure.date);
+            // this.dt=formatDate(new Date(),'dd/MM/yyyy', 'fr');
+            // mesure.date=formatDate(mesure.date,'dd/MM/yyyy', 'fr');
+            this.dt=new Date().getTime();
+            const valeur =new Date(mesure.date).getTime();
+            // if(mesure.date !== this.dt)
+            if(valeur > this.dt){
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'La date est au future!',  
+                text: "La date est dans le future ! ",   
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
@@ -61,7 +69,7 @@ export class AjoutModifierMesureComponent implements OnInit {
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'La taille doit être superieur ou égale à 30!',  
+                text: 'La taille doit être superieur ou égale à 30 cm!',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
@@ -77,7 +85,7 @@ export class AjoutModifierMesureComponent implements OnInit {
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'Le pression arterielle doit être superieur à 0!',  
+                text: 'La pression arterielle doit être superieur à 0!',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
@@ -85,13 +93,13 @@ export class AjoutModifierMesureComponent implements OnInit {
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'La pouls doit être superieur à 0!',  
+                text: 'Le pouls doit être superieur à 0!',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
             }
           
-            if (mesure.date !== null && mesure.poids >=1 && mesure.taille >= 30 && mesure.pouls >= 1) {
+            if (valeur <= this.dt && mesure.poids >=1 && mesure.taille >= 30 && mesure.pouls >= 1) {
                
             this.suiviSanteService
             .modifyMeasurement(this.data.id, this.mesureForm.value);
@@ -99,15 +107,24 @@ export class AjoutModifierMesureComponent implements OnInit {
             // Émettez un événement pour indiquer que les données ont été ajoutées
             this.suiviSanteService.triggerUpdate();
             Swal.fire('Merci !...', 'Mesure Modifier avec succès!', 'success')
+            this.router.navigate(['/','historique']);
               }
           } else {
+            
+          // this.dt=formatDate(new Date(),'dd/MM/yyyy', 'fr');
+          // mesure.date=formatDate(mesure.date,'dd/MM/yyyy', 'fr');
+            // console.log("la date de mesure :"+mesure.date+"new date :"+ this.dt);
+            this.dt=new Date().getTime();
+            const valeur =new Date(mesure.date).getTime();
+            
 
+            
 
-            if(mesure.date == null || mesure.date > new Date) {
+            if(valeur > this.dt) {
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'La date est invalide!',  
+                text: "La date est dans le future ! ",  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
@@ -131,7 +148,7 @@ export class AjoutModifierMesureComponent implements OnInit {
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'Le pression arterielle doit être superieur à 0!',  
+                text: 'La pression arterielle doit être superieur à 0!',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
@@ -139,30 +156,31 @@ export class AjoutModifierMesureComponent implements OnInit {
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'La pouls doit être superieur à 0!',  
+                text: 'Le pouls doit être superieur à 0!',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
             }
           
-            if (mesure.date !== null && mesure.poids >=1 && mesure.taille >= 30 && mesure.pouls >= 1) {
+            if (valeur <= this.dt && mesure.poids >=1 && mesure.taille >= 20 && mesure.pouls >= 1) {
+              console.log('Mesure :'+mesure.taille.length)
                
               this.suiviSanteService.ajouterMesure(mesure);
+              
               this.mesureForm.reset();
               // Émettez un événement pour indiquer que les données ont été ajoutées
               this.suiviSanteService.triggerUpdate();
               Swal.fire('Merci !...', 'Mesure Enregistrer avec succès!', 'success')
+              
+              this.router.navigate(['/', 'historique']);
+              
               }
-          
-            
-               
               // this.suiviSanteService.ajouterMesure(mesure);
               // this.mesureForm.reset();
               // // Émettez un événement pour indiquer que les données ont été ajoutées
               // this.suiviSanteService.triggerUpdate();
-              // Swal.fire('Merci !...', 'Mesure Enregistrer avec succès!', 'success')
+              // Swal.fire('Merci !...', 'Mesure Enregistrer avec succès!', 'success')     
               
-           
           }
         }
       }

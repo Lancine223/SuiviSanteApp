@@ -1,35 +1,37 @@
 
-<div mat-dialog-title id="titre"> Ajouter Des Mesures</div>
+<div mat-dialog-title id="titre" *ngIf="!data"> Ajouter Des Mesures</div>
+<div mat-dialog-title class="titre" *ngIf="data"> Modifier Des Mesures</div>
 <div mat-dialog-content id="matback">
     <form  [formGroup]="mesureForm"  (ngSubmit)="onSubmit()">
         <div class="form-row-md-20" id="form">
           
           <div class="form-group col-sm">
             <label for="inputPassword4">Date</label>
-            <input type="date" matInput class="form-control" id="date" placeholder="75kg" formControlName="date" >
+            <input type="date" matInput class="form-control" id="date" formControlName="date" required >
           </div>
           
           
           <div class="form-group col-sm">
             <label for="inputPassword4">Nom Complet</label>
-            <input type="text" matInput class="form-control" id="NomComplet" placeholder="Nom et prenom" formControlName="NomComplet">
+            <input type="text" matInput class="form-control" id="NomComplet" placeholder="Nom et prenom" formControlName="NomComplet" required minlength="3">
+
           </div>
           
           <div class="form-group col-sm">
             <label for="inputPassword4">Poids (en kg)</label>
-            <input type="number" matInput class="form-control" id="poids" placeholder="75kg" formControlName="poids">
+            <input type="number" matInput class="form-control" id="poids" placeholder="75kg" formControlName="poids"  [maxLength]="3">
           </div>
           <div class="form-group col-sm">
             <label for="inputPassword4">Taille (en cm)</label>
-            <input type="number" matInput class="form-control" id="taille" placeholder="175cm"  formControlName="taille">
+            <input type="number" matInput class="form-control" id="taille" placeholder="175cm"  formControlName="taille" >
           </div>
           <div class="form-group col-sm">
             <label for="inputPassword4">Pression Artérielle</label>
-            <input type="number" matInput class="form-control" id="pressionArterielle" placeholder="18/24 mmkg" formControlName="pressionArterielle">
+            <input type="number" matInput class="form-control" id="pressionArterielle" placeholder="18/24 mmkg" formControlName="pressionArterielle" >
           </div>
           <div class="mydiv">
             <label for="inputPassword4">Pouls</label>
-            <input type="number" matInput class="form-control" id="pouls" placeholder="23" formControlName="pouls">
+            <input type="number" matInput class="form-control" id="pouls" placeholder="23" formControlName="pouls" required maxlength="3">
           </div>
         </div>
        

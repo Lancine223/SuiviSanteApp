@@ -16,6 +16,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr);
+
 
 @NgModule({
   declarations: [
@@ -39,7 +43,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [{provide: localeFr, useValue: 'fr-FR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

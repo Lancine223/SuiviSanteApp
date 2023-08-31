@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 
 // 
 
@@ -18,7 +18,7 @@ ApexFill,
 ApexYAxis, ApexLegend
 } from "ng-apexcharts";
 import { SuiviSanteServiceService } from '../suivi-sante-service.service';
-import { DatePipe } from '@angular/common';
+// import { formatDate} from '@angular/common';
 //
 export type chartOptionstwo = {
   series: ApexAxisChartSeries;
@@ -84,7 +84,7 @@ export class TableauBordComponent {
   private poids:number[] = [] 
   private pressionArt:number[] = [];
   private pouls:number[] = [];
-  private jourD: string[]=[];
+  // private jourD: string[]=[];
   private nomp: string[]=[];
   private togather: string[]=[];
 
@@ -95,12 +95,13 @@ export class TableauBordComponent {
   constructor(private service:SuiviSanteServiceService) {
     this.suiviSanteService = service;
     this.suiviSanteService.getMesures().forEach((element: { poids: number; pressionArterielle: number; pouls: number; date:string, NomComplet:string , togather:string}) => {
-        this.poids.push(element.poids);
-        this.pressionArt.push(element.pressionArterielle);
-        this.pouls.push(element.pouls);
-        this.jourD.push(element.date);
-        this.nomp.push(element.NomComplet);
-        this.togather.push(element.NomComplet+'->'+element.date);
+    this.poids.push(element.poids);
+    this.pressionArt.push(element.pressionArterielle);
+    this.pouls.push(element.pouls);
+    // this.jourD.push(element.date);
+    this.nomp.push(element.NomComplet);
+    // element.date=formatDate(element.date,'dd/MM/yyyy', 'fr');
+    this.togather.push(element.NomComplet+'->'+element.date);
     });
     // 
     this.optionsBar = {

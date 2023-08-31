@@ -5,7 +5,7 @@
     margin-bottom: 20px;  
 }
 div input, button{
-    box-shadow: 0 0 1rem black;
+    box-shadow: 0 0 0.5rem black;
     padding: 10px 20px 10px 20px;
 }
 div input{
@@ -45,6 +45,13 @@ div input{
     background-color: #fff;
 }
 #titre{
+    text-transform: uppercase;
+    text-align: center;
+    color: #26B08D;
+    background-color: #fff;
+
+}
+.titre{
     text-transform: uppercase;
     text-align: center;
     color: #26B08D;
