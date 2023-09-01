@@ -94,14 +94,21 @@ export class TableauBordComponent {
   chartLabel = ["poids", "Pression Arterielle","Utilisateurs"]
   constructor(private service:SuiviSanteServiceService) {
     this.suiviSanteService = service;
-    this.suiviSanteService.getMesures().forEach((element: { poids: number; pressionArterielle: number; pouls: number; date:string, NomComplet:string , togather:string}) => {
+    this.suiviSanteService.getMesures().forEach((element: { poids: number; tsystolique: number; tdiastolique:number, pouls: number; date:string, NomComplet:string , togather:string}) => {
     this.poids.push(element.poids);
-    this.pressionArt.push(element.pressionArterielle);
+    // const ALArrondi = element.tsystolique/element.tdiastolique;
+    // const PREALrrondi: number = parseFloat(ALArrondi.toFixed(1));
+    // Calculer la PAM en utilisant la formule
+    const pam = (element.tsystolique + 2 * element.tdiastolique) / 3;
+    // Arrondir le résultat à deux décimales
+    const padandps = Math.round(pam * 100) / 100;
+    this.pressionArt.push(padandps);
     this.pouls.push(element.pouls);
     // this.jourD.push(element.date);
     this.nomp.push(element.NomComplet);
     // element.date=formatDate(element.date,'dd/MM/yyyy', 'fr');
     this.togather.push(element.NomComplet+'->'+element.date);
+    
     });
     // 
     this.optionsBar = {
@@ -131,8 +138,9 @@ export class TableauBordComponent {
       }, {
         name: "Pression Arterielle",
         data: this.pressionArt,// [6, 12, 4, 7, 5, 3, 6, 4, 3, 3, 5, 6, 7, 4],
-        color: "#FF0000"
-        // color: "#E3E7FC"
+        // color: "#FF0000"
+        // color: this.prcouleur
+        color: "#E3E7FC"
       }
       , {
         name: "Pouls",

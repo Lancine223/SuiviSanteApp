@@ -26,6 +26,22 @@ table {
       width: 100%;
     }
   }
+  #btnaim{
+    outline: none;
+  }
+  #btnanim:before{
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+  }
+  #btnanim:hover:before{
+    opacity: 1;
+  }
+  @keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
   
   .action {
     display: grid;

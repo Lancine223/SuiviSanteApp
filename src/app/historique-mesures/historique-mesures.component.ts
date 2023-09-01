@@ -58,7 +58,7 @@ export class HistoriqueMesuresComponent implements OnInit{
     this.dataSource = new MatTableDataSource(this.mesures);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    console.log(this.dataSource);
+   
 // Abonnez-vous à l'événement de mise à jour
     this.suiviSanteService.update$.subscribe(() => {
     // Mettez à jour vos données ici

@@ -88,7 +88,15 @@
     font-size: larger;
     transition: .5 ease;
     transform: scale(1.1);
+    cursor: pointer;
+    border: none;
+    outline: none;
   }
+  
+  /*----------------------------------------------------------------*/
+  /********************************/
+  
+  /********************************/
   #sidebarMenu{
     background-color: #fff !important;
     color: #26B08D;

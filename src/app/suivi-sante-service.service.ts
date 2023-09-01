@@ -38,6 +38,73 @@ export class SuiviSanteServiceService {
     // Arrondir l'IMC à une décimale
     const imcArrondi: number = parseFloat(lastaa.toFixed(1));
     mesure.imc=imcArrondi;
+    //////////////
+    ////////////////////////////////COLOR////////
+    if (mesure.imc <= 12 ){
+      mesure.couleur=  'red';
+      mesure.colImc= 'maigre';
+    }
+    
+    if (mesure.imc >= 13 && mesure.imc <18){
+      mesure.couleur= 'orange';
+      mesure.colImc= 'maigre';
+
+    }
+    if (mesure.imc >= 18 && mesure.imc <= 25){
+      mesure.couleur=  '#26B08D';
+      mesure.colImc= 'normal';
+    }
+    if
+     (mesure.imc > 25 && mesure.imc < 35){
+      mesure.couleur=  'orange';
+      mesure.colImc= 'sur-poids';
+    }
+    if (mesure.imc >= 35) {
+      mesure.couleur=  'red';
+      mesure.colImc= 'modéré';
+
+    } if(mesure.imc >35){
+      mesure.couleur=  'red';
+      mesure.colImc= 'sevère';
+
+    }
+    ///////Pression Arterielle/////
+    if (mesure.tsystolique < 80 && mesure.tdiastolique < 40){
+      mesure.pressionArterielle= 'Très Optimal';
+      mesure.couleurP= 'red';
+    }else
+    if (mesure.tsystolique < 120 && mesure.tdiastolique < 80){
+      mesure.pressionArterielle= 'Optimal';
+      mesure.couleurP= 'orange';
+    }else
+    if ( 120 <= mesure.tsystolique  && mesure.tsystolique <= 129 || mesure.tdiastolique >= 80 && mesure.tdiastolique <= 84) {
+      mesure.pressionArterielle= 'Normal';
+      mesure.couleurP= '#26B08D';
+    }else
+    if (mesure.tsystolique >= 130 && mesure.tsystolique <= 139 || mesure.tdiastolique >= 85 && mesure.tdiastolique <= 89) {
+      mesure.pressionArterielle= 'Normal haute';
+      mesure.couleurP= '#26B08D';
+    }else
+    if (mesure.tsystolique >= 140 && mesure.tsystolique <= 159 || mesure.tdiastolique >= 90 && mesure.tdiastolique <= 99) {
+      mesure.pressionArterielle= 'Hypertension légère';
+      mesure.couleurP= 'orange';
+    }else 
+    if (mesure.tsystolique >= 160 && mesure.tsystolique <= 179 || mesure.tdiastolique >= 100 && mesure.tdiastolique <= 109) {
+      mesure.pressionArterielle= 'Hypertenstion modérée';
+      mesure.couleurP= 'orange';
+    }else 
+    if (mesure.tsystolique >= 180 && mesure.tsystolique <= 209 || mesure.tdiastolique >= 110 && mesure.tdiastolique <= 119) {
+      mesure.pressionArterielle= 'Hypertension sevère';
+      mesure.couleurP= 'red';
+    }else
+    if (mesure.tsystolique > 129 || mesure.tdiastolique > 119) {
+      mesure.pressionArterielle= 'Hypertension très sevère';
+      mesure.couleurP= 'red';
+    }else{
+      mesure.pressionArterielle= 'Tension anormale';
+      mesure.couleurP= 'red';
+    }
+    ////////////
     this.mesures.push(mesure);
     //
     //
@@ -62,6 +129,75 @@ export class SuiviSanteServiceService {
       // Arrondir l'IMC à une décimale
       const imcArrondi: number = parseFloat(lastaa.toFixed(1));
       mesure.imc=imcArrondi;
+      ////////////////////////////////COLORimc////////
+    ////////////////////////////////COLOR////////
+    if (mesure.imc <= 12 ){
+      mesure.couleur=  'red';
+      mesure.colImc= 'trop maigre';
+    }
+    
+    if (mesure.imc >= 13 && mesure.imc <18){
+      mesure.couleur= 'orange';
+      mesure.colImc= 'maigre';
+
+    }
+    if (mesure.imc >= 18 && mesure.imc <= 25){
+      mesure.couleur=  '#26B08D';
+      mesure.colImc= 'normal';
+    }
+    if
+     (mesure.imc > 25 && mesure.imc < 35){
+      mesure.couleur=  'orange';
+      mesure.colImc= 'sur-poids';
+    }
+    if (mesure.imc >= 35) {
+      mesure.couleur=  'red';
+      mesure.colImc= 'modéré';
+
+    }
+    if(mesure.imc >35){
+      mesure.couleur=  'red';
+      mesure.colImc= 'sevère';
+
+    }
+   ////////////////////////////////////////////////////////////////////////////////////////////////
+      ///////Pression Arterielle/////
+    if (mesure.tsystolique < 80 && mesure.tdiastolique < 40){
+      mesure.pressionArterielle= 'Très Optimal';
+      mesure.couleurP= 'red';
+    }else
+    if (mesure.tsystolique < 120 && mesure.tdiastolique < 80){
+      mesure.pressionArterielle= 'Optimal';
+      mesure.couleurP= 'orange';
+    }else
+    if ( 120 <= mesure.tsystolique  && mesure.tsystolique <= 129 || mesure.tdiastolique >= 80 && mesure.tdiastolique <= 84) {
+      mesure.pressionArterielle= 'Normal';
+      mesure.couleurP= '#26B08D';
+    }else
+    if (mesure.tsystolique >= 130 && mesure.tsystolique <= 139 || mesure.tdiastolique >= 85 && mesure.tdiastolique <= 89) {
+      mesure.pressionArterielle= 'Normal haute';
+      mesure.couleurP= '#26B08D';
+    }else
+    if (mesure.tsystolique >= 140 && mesure.tsystolique <= 159 || mesure.tdiastolique >= 90 && mesure.tdiastolique <= 99) {
+      mesure.pressionArterielle= 'Hypertension légère';
+      mesure.couleurP= 'orange';
+    }else 
+    if (mesure.tsystolique >= 160 && mesure.tsystolique <= 179 || mesure.tdiastolique >= 100 && mesure.tdiastolique <= 109) {
+      mesure.pressionArterielle= 'Hypertenstion modérée';
+      mesure.couleurP= 'orange';
+    }else 
+    if (mesure.tsystolique >= 180 && mesure.tsystolique <= 209 || mesure.tdiastolique >= 110 && mesure.tdiastolique <= 119) {
+      mesure.pressionArterielle= 'Hypertension sevère';
+      mesure.couleurP= 'red';
+    }else
+    if (mesure.tsystolique > 129 || mesure.tdiastolique > 119) {
+      mesure.pressionArterielle= 'Hypertension très sevère';
+      mesure.couleurP= 'red';
+    }else{
+      mesure.pressionArterielle= 'Tension anormale';
+      mesure.couleurP= 'red';
+    }
+    ////////////
       const dateauj=new Date();
       const datefuture = dateauj.getDate()+1;
       if(mesure.date.toLocaleString()>=datefuture.toLocaleString()) {

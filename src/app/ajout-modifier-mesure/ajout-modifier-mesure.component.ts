@@ -34,8 +34,10 @@ export class AjoutModifierMesureComponent implements OnInit {
       date: ['', Validators.required],
       poids:  ['', Validators.required],
       taille: ['', Validators.required],
-      pressionArterielle: ['', Validators.required],
+      pressionArterielle: '',
       pouls: ['', Validators.required],
+      tsystolique: ['', Validators.required],
+      tdiastolique: ['', Validators.required],
       imc: ''
      
     });
@@ -65,41 +67,55 @@ export class AjoutModifierMesureComponent implements OnInit {
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
-            }if(mesure.taille < 30 ){
+            }
+            if(mesure.taille < 30 || mesure.taille >250){
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'La taille doit être superieur ou égale à 30 cm!',  
+                text: 'La taille doit être compris entre 30 à 250 cm ! ',   
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
-            }if(mesure.poids < 1 ){
+            }
+            if(mesure.poids < 1 || mesure.poids > 300){
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'Le poids doit être superieur à 0!',  
+                text: 'Le poids doit être compris entre 1 à 300 kg ! ',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
-            }if(mesure.pressionArterielle < 1 ){
+            }
+            if(mesure.tsystolique < 1 || mesure.tsystolique > 600){
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'La pression arterielle doit être superieur à 0!',  
+                text: 'La Tension Systolique doit être compris entre 1 à 600 mmkg ! ',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
-            }if(mesure.pouls < 1 ){
+            }
+            if(mesure.tdiastolique < 1 || mesure.tdiastolique > 600){
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'Le pouls doit être superieur à 0!',  
+                text: 'La Tension Diastolique doit être compris entre 1 à 600 mmkg ! ',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }
+            if(mesure.pouls < 1 || mesure.pouls > 300 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'Le pouls doit être compris entre 1 à 300 fois par minute! ',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
             }
           
-            if (valeur <= this.dt && mesure.poids >=1 && mesure.taille >= 30 && mesure.pouls >= 1) {
+          
+            if (valeur <= this.dt && mesure.poids >=1 && mesure.poids <=300 && mesure.taille >= 30 && mesure.taille <= 250 && mesure.pouls >= 1 && mesure.pouls <=300 && mesure.tsystolique >= 1 && mesure.tsystolique <=600 && mesure.tdiastolique >= 1 && mesure.tdiastolique <=600) {
                
             this.suiviSanteService
             .modifyMeasurement(this.data.id, this.mesureForm.value);
@@ -128,42 +144,55 @@ export class AjoutModifierMesureComponent implements OnInit {
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
-            }if(mesure.taille < 30 ){
+            }
+            if(mesure.taille < 30 || mesure.taille >250){
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'La taille doit être superieur ou égale à 30 cm !',  
+                text: 'La taille doit être compris entre 30 à 250 cm ! ',   
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
-            }if(mesure.poids < 1 ){
+            }
+            if(mesure.poids < 1 || mesure.poids > 300){
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'Le poids doit être superieur à 0!',  
+                text: 'Le poids doit être compris entre 1 à 300 kg ! ',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
-            }if(mesure.pressionArterielle < 1 ){
+            }
+            if(mesure.tsystolique < 1 || mesure.tsystolique > 600){
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'La pression arterielle doit être superieur à 0!',  
+                text: 'La Tension Systolique doit être compris entre 1 à 600 mmkg ! ',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
-            }if(mesure.pouls < 1 ){
+            }
+            if(mesure.tdiastolique < 1 || mesure.tdiastolique > 600){
               Swal.fire({  
                 icon: 'error',  
                 title: 'Oops...',  
-                text: 'Le pouls doit être superieur à 0!',  
+                text: 'La Tension Diastolique doit être compris entre 1 à 600 mmkg ! ',  
+                
+                // footer: '<a href>Why do I have this issue?</a>'  
+              }) 
+            }
+            if(mesure.pouls < 1 || mesure.pouls > 300 ){
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Oops...',  
+                text: 'Le pouls doit être compris entre 1 à 300 fois par minute! ',  
                 
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
             }
           
-            if (valeur <= this.dt && mesure.poids >=1 && mesure.taille >= 20 && mesure.pouls >= 1) {
-              console.log('Mesure :'+mesure.taille.length)
+            if (valeur <= this.dt && mesure.poids >=1 && mesure.poids <=300 && mesure.taille >= 30 && mesure.taille <= 250 && mesure.pouls >= 1 && mesure.pouls <=300 && mesure.tsystolique >= 1 && mesure.tsystolique <=600 && mesure.tdiastolique >= 1 && mesure.tdiastolique <=600) {
+             
                
               this.suiviSanteService.ajouterMesure(mesure);
               
@@ -172,7 +201,7 @@ export class AjoutModifierMesureComponent implements OnInit {
               this.suiviSanteService.triggerUpdate();
               Swal.fire('Merci !...', 'Mesure Enregistrer avec succès!', 'success')
               
-              this.router.navigate(['/', 'historique']);
+             
               
               }
               // this.suiviSanteService.ajouterMesure(mesure);
