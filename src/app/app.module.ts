@@ -18,6 +18,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+
 registerLocaleData(localeFr);
 
 

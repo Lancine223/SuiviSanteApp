@@ -1,7 +1,7 @@
 
 <button class="btn btn-primary" style="margin-right: 10px;margin-left: 10px;margin-top: 20px; background-color: #26B08D" (click)="OpenDialog()"> <i class="fa-solid fa-circle-plus" id="btnanim"></i> Ajouter Mesure</button>
-<div class="container-grid" id="boot" style="width: 100vw; box-sizing: border-box; height: 80vh;" *ngIf="!mesures.length">
-  <h1><marquee behavior="" direction="right">Aucune mesure n'est enregistrer !</marquee></h1>
+<div class="container-grid animate__animated animate__zoomIn" id="boot" style="width: 100vw; box-sizing: border-box; height: 80vh;" *ngIf="!mesures.length">
+  <h1 class=""> Aucune mesure n'est enregistrer !</h1>
   <img src="../../assets/img/listaddimg.jpg" alt="" width="60%" height="100%">
 </div>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, numberAttribute, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, MaxLengthValidator, MaxValidator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { Mesure } from '../mesure';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SuiviSanteServiceService } from '../suivi-sante-service.service';
@@ -21,6 +21,7 @@ export class AjoutModifierMesureComponent implements OnInit {
   mesures: Mesure[] = [];
   lastUsedId: number=0; // Déclarez lastUsedId ici
   dt: any;
+  champsTouche: { [champ: string]: boolean } = {};
   
   
 
@@ -32,20 +33,57 @@ export class AjoutModifierMesureComponent implements OnInit {
       id:'',
       NomComplet: ['', Validators.required ],
       date: ['', Validators.required],
-      poids:  ['', Validators.required],
-      taille: ['', Validators.required],
+      poids:  ['',[ Validators.required, this.validateChamp('poids')]],
+      taille: ['',[ Validators.required, this.validateChamp('taille')]],
       pressionArterielle: '',
-      pouls: ['', Validators.required],
-      tsystolique: ['', Validators.required],
-      tdiastolique: ['', Validators.required],
+      pouls: ['',[ Validators.required, this.validateChamp('pouls')]],
+      tsystolique: ['',[ Validators.required, this.validateChamp('tsystolique')]],
+      tdiastolique: ['',[ Validators.required, this.validateChamp('tdiastolique')]],
       imc: ''
      
     });
   }
+
+  
   ngOnInit(): void {
     
     this.mesureForm.patchValue(this.data);
+    this.mesureForm = this.formBuilder.group({
+      id:'',
+      NomComplet: ['', Validators.required ],
+      date: ['', Validators.required],
+      poids:  ['',[ Validators.required, this.validateChamp('poids')]],
+      taille: ['',[ Validators.required, this.validateChamp('taille')]],
+      pressionArterielle: '',
+      pouls: ['',[ Validators.required, this.validateChamp('pouls')]],
+      tsystolique: ['',[ Validators.required, this.validateChamp('tsystolique')]],
+      tdiastolique: ['',[ Validators.required, this.validateChamp('tdiastolique')]],
+      imc: ''
+     
+    });
   }
+  validateChamp(champ: string): Validators {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const champValue = control.value;
+
+      if (isNaN(champValue)) {
+        return { 'nonNombre': true };
+      }
+
+      // Autorisez un, deux ou trois chiffres
+    if (champValue < 1 || champValue > 999) {
+      return { 'longueurIncorrecte': true };
+    }
+
+      return null;
+    };
+  }
+  
+
+verifierChamp(champ: string) {
+  this.champsTouche[champ] = true;
+}
+
 
       onSubmit() {
         if (this.mesureForm.valid) {
@@ -120,8 +158,10 @@ export class AjoutModifierMesureComponent implements OnInit {
             this.suiviSanteService
             .modifyMeasurement(this.data.id, this.mesureForm.value);
             this.mesureForm.reset();
+            this.champsTouche = {};
             // Émettez un événement pour indiquer que les données ont été ajoutées
             this.suiviSanteService.triggerUpdate();
+
             Swal.fire('Merci !...', 'Mesure Modifier avec succès!', 'success')
             this.router.navigate(['/','historique']);
               }
@@ -195,6 +235,7 @@ export class AjoutModifierMesureComponent implements OnInit {
              
                
               this.suiviSanteService.ajouterMesure(mesure);
+              this.champsTouche = {};
               
               this.mesureForm.reset();
               // Émettez un événement pour indiquer que les données ont été ajoutées

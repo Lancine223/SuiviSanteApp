@@ -138,9 +138,9 @@ export class TableauBordComponent {
       }, {
         name: "Pression Arterielle",
         data: this.pressionArt,// [6, 12, 4, 7, 5, 3, 6, 4, 3, 3, 5, 6, 7, 4],
-        // color: "#FF0000"
+        color: "#FF0000"
         // color: this.prcouleur
-        color: "#E3E7FC"
+        
       }
       , {
         name: "Pouls",
