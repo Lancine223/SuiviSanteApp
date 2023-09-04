@@ -13,37 +13,25 @@
           
           <div class="form-group col-sm">
             <label for="inputPassword4">Nom Complet</label>
-            <input type="text" matInput class="form-control" id="NomComplet" placeholder="Nom et prenom" formControlName="NomComplet">
-
+            <input type="text" matInput class="form-control" id="NomComplet" placeholder="Nom et prenom" formControlName="NomComplet" required minlength="4" >
           </div>
           
           <div class="form-group col-sm">
             <label for="inputPassword4">Poids (en kg)</label>
             <input type="number" matInput class="form-control" id="poids" placeholder="75kg" formControlName="poids" (blur)="verifierChamp('poids')" >
              <!--validation-->
-             <div *ngIf="champsTouche['poids'] && mesureForm.get('poids')?.hasError('required')" class="text-danger">
-              Ce champ est requis.
-            </div>
-            <div *ngIf="champsTouche['poids'] && mesureForm.get('poids')?.hasError('nonNombre')" class="text-danger">
-              Le poids doit être un nombre.
-            </div>
             <div *ngIf="champsTouche['poids'] && mesureForm.get('poids')?.hasError('longueurIncorrecte')" class="text-danger">
-              max(3nombres)
+              1 à 3 chiffres max
             </div>
             <!-- validation-->
           </div>
           <div class="form-group col-sm">
             <label for="inputPassword4">Taille (en cm)</label>
-            <input type="number" matInput class="form-control" id="taille" placeholder="175cm"  formControlName="taille" (blur)="verifierChamp('taille')" >
+            <input type="number" matInput class="form-control" id="taille" placeholder="175cm"  formControlName="taille" (blur)="verifierChamp('taille')"  >
             <!--validation-->
-            <div *ngIf="champsTouche['taille'] && mesureForm.get('taille')?.hasError('required')" class="text-danger">
-              Ce champ est requis.
-            </div>
-            <div *ngIf="champsTouche['taille'] && mesureForm.get('taille')?.hasError('nonNombre')" class="text-danger">
-              La taille doit être un nombre.
-            </div>
+            
             <div *ngIf="champsTouche['taille'] && mesureForm.get('taille')?.hasError('longueurIncorrecte')" class="text-danger">
-              max(3nombres)
+              1 à 3 chiffres max
             </div>
             <!-- validation-->
           </div>
@@ -52,45 +40,30 @@
             <label for="inputPassword4">Tension Systolique</label>
             <input type="number" matInput class="form-control" id="tsystolique" placeholder="18 mmkg" formControlName="tsystolique" (blur)="verifierChamp('tsystolique')" >
              <!--validation-->
-             <div *ngIf="champsTouche['tsystolique'] && mesureForm.get('tsystolique')?.hasError('required')" class="text-danger">
-              Ce champ est requis.
-            </div>
-            <div *ngIf="champsTouche['tsystolique'] && mesureForm.get('tsystolique')?.hasError('nonNombre')" class="text-danger">
-              La Tension Systolique doit être un nombre.
-            </div>
+             
             <div *ngIf="champsTouche['tsystolique'] && mesureForm.get('tsystolique')?.hasError('longueurIncorrecte')" class="text-danger">
-              max(3nombres)
+              1 à 3 chiffres max
             </div>
             <!-- validation-->
           </div>
           <div class="form-group col-sm">
             <label for="inputPassword4">Tension Diastolyque</label>
-            <input type="number" matInput class="form-control" id="tdiastolique" placeholder="24 mmkg" formControlName="tdiastolique" (blur)="verifierChamp('tdiastolique')">
+            <input type="number" matInput class="form-control" id="tdiastolique" placeholder="24 mmkg" formControlName="tdiastolique" (blur)="verifierChamp('tdiastolique')" >
              <!--validation-->
-             <div *ngIf="champsTouche['tdiastolique'] && mesureForm.get('tdiastolique')?.hasError('required')" class="text-danger">
-              Ce champ est requis.
-            </div>
-            <div *ngIf="champsTouche['tdiastolique'] && mesureForm.get('tdiastolique')?.hasError('nonNombre')" class="text-danger">
-              La Tension Diastolyque doit être un nombre.
-            </div>
+            
             <div *ngIf="champsTouche['tdiastolique'] && mesureForm.get('tdiastolique')?.hasError('longueurIncorrecte')" class="text-danger">
-              max(3nombres)
+              1 à 3 chiffres max
             </div>
             <!-- validation-->
           </div>     
         </div>
         <div class="form-group col-sm" style="margin-bottom: 20px;">
           <label for="inputPassword4">Pouls</label>
-          <input type="number" matInput class="form-control" id="pouls" placeholder="23" formControlName="pouls" (blur)="verifierChamp('pouls')" >
+          <input type="number" matInput class="form-control" id="pouls" placeholder="23" formControlName="pouls" (blur)="verifierChamp('pouls')" style="border:  {{valdcolorPouls}}"  >
            <!--validation-->
-           <div *ngIf="champsTouche['pouls'] && mesureForm.get('pouls')?.hasError('required')" class="text-danger">
-            Ce champ est requis.
-          </div>
-          <div *ngIf="champsTouche['pouls'] && mesureForm.get('pouls')?.hasError('nonNombre')" class="text-danger">
-            Le Pouls doit être un nombre.
-          </div>
+           
           <div *ngIf="champsTouche['pouls'] && mesureForm.get('pouls')?.hasError('longueurIncorrecte')" class="text-danger">
-            max(3nombres)
+            1 à 3 chiffres max
           </div>
           <!-- validation-->
         </div>

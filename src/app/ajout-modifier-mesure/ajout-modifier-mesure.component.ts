@@ -1,7 +1,7 @@
 import { Component, OnInit, numberAttribute, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, AbstractControl, Validators, MinLengthValidator } from '@angular/forms';
 import { Mesure } from '../mesure';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SuiviSanteServiceService } from '../suivi-sante-service.service';
 
 import { Router } from '@angular/router';
@@ -22,10 +22,16 @@ export class AjoutModifierMesureComponent implements OnInit {
   lastUsedId: number=0; // Déclarez lastUsedId ici
   dt: any;
   champsTouche: { [champ: string]: boolean } = {};
+  valdcolor: string = "none";
+  valdcolorTaille: string = "none";
+  valdcolorPouls: string = "none";
+  valdcolorTsystolique: string = "none";
+  valdcolorTdiastolique: string = "none";
+
   
   
 
-  constructor(
+  constructor(private _dialogRef: MatDialogRef<AjoutModifierMesureComponent>,
     private formBuilder: FormBuilder, private _dialog: MatDialog, private suiviSanteService: SuiviSanteServiceService, private router: Router,@Inject(MAT_DIALOG_DATA) public data: Mesure[] | any
   ) {
   
@@ -50,7 +56,7 @@ export class AjoutModifierMesureComponent implements OnInit {
     this.mesureForm.patchValue(this.data);
     this.mesureForm = this.formBuilder.group({
       id:'',
-      NomComplet: ['', Validators.required ],
+      NomComplet: ['', [Validators.required, MinLengthValidator]],
       date: ['', Validators.required],
       poids:  ['',[ Validators.required, this.validateChamp('poids')]],
       taille: ['',[ Validators.required, this.validateChamp('taille')]],
@@ -61,23 +67,34 @@ export class AjoutModifierMesureComponent implements OnInit {
       imc: ''
      
     });
+ 
+
   }
+  ////////////////////////////////
+    ///LAFIN
+  
   validateChamp(champ: string): Validators {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      const champValue = control.value;
+      const champValue = control.value; 
+      
 
       if (isNaN(champValue)) {
+        
         return { 'nonNombre': true };
       }
-
+      
       // Autorisez un, deux ou trois chiffres
     if (champValue < 1 || champValue > 999) {
+      
       return { 'longueurIncorrecte': true };
     }
-
+      // this.valdcolor="none";
       return null;
     };
   }
+
+  
+/**/ 
   
 
 verifierChamp(champ: string) {
@@ -97,6 +114,7 @@ verifierChamp(champ: string) {
             this.dt=new Date().getTime();
             const valeur =new Date(mesure.date).getTime();
             // if(mesure.date !== this.dt)
+            
             if(valeur > this.dt){
               Swal.fire({  
                 icon: 'error',  
@@ -106,42 +124,42 @@ verifierChamp(champ: string) {
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
             }
-            if(mesure.taille < 30 || mesure.taille >250){
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Oops...',  
-                text: 'La taille doit être compris entre 30 à 250 cm ! ',   
+            // if(mesure.taille < 30 || mesure.taille >250){
+            //   Swal.fire({  
+            //     icon: 'error',  
+            //     title: 'Oops...',  
+            //     text: 'La taille doit être compris entre 30 à 250 cm ! ',   
                 
-                // footer: '<a href>Why do I have this issue?</a>'  
-              }) 
-            }
-            if(mesure.poids < 1 || mesure.poids > 300){
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Oops...',  
-                text: 'Le poids doit être compris entre 1 à 300 kg ! ',  
+            //     // footer: '<a href>Why do I have this issue?</a>'  
+            //   }) 
+            // }
+            // if(mesure.poids < 1 || mesure.poids > 300){
+            //   Swal.fire({  
+            //     icon: 'error',  
+            //     title: 'Oops...',  
+            //     text: 'Le poids doit être compris entre 1 à 300 kg ! ',  
                 
-                // footer: '<a href>Why do I have this issue?</a>'  
-              }) 
-            }
-            if(mesure.tsystolique < 1 || mesure.tsystolique > 600){
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Oops...',  
-                text: 'La Tension Systolique doit être compris entre 1 à 600 mmkg ! ',  
+            //     // footer: '<a href>Why do I have this issue?</a>'  
+            //   }) 
+            // }
+            // if(mesure.tsystolique < 1 || mesure.tsystolique > 600){
+            //   Swal.fire({  
+            //     icon: 'error',  
+            //     title: 'Oops...',  
+            //     text: 'La Tension Systolique doit être compris entre 1 à 600 mmkg ! ',  
                 
-                // footer: '<a href>Why do I have this issue?</a>'  
-              }) 
-            }
-            if(mesure.tdiastolique < 1 || mesure.tdiastolique > 600){
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Oops...',  
-                text: 'La Tension Diastolique doit être compris entre 1 à 600 mmkg ! ',  
+            //     // footer: '<a href>Why do I have this issue?</a>'  
+            //   }) 
+            // }
+            // if(mesure.tdiastolique < 1 || mesure.tdiastolique > 600){
+            //   Swal.fire({  
+            //     icon: 'error',  
+            //     title: 'Oops...',  
+            //     text: 'La Tension Diastolique doit être compris entre 1 à 600 mmkg ! ',  
                 
-                // footer: '<a href>Why do I have this issue?</a>'  
-              }) 
-            }
+            //     // footer: '<a href>Why do I have this issue?</a>'  
+            //   }) 
+            // }
             if(mesure.pouls < 1 || mesure.pouls > 300 ){
               Swal.fire({  
                 icon: 'error',  
@@ -153,17 +171,18 @@ verifierChamp(champ: string) {
             }
           
           
-            if (valeur <= this.dt && mesure.poids >=1 && mesure.poids <=300 && mesure.taille >= 30 && mesure.taille <= 250 && mesure.pouls >= 1 && mesure.pouls <=300 && mesure.tsystolique >= 1 && mesure.tsystolique <=600 && mesure.tdiastolique >= 1 && mesure.tdiastolique <=600) {
+            if (valeur <= this.dt && mesure.poids >=1 && mesure.taille >= 1 && mesure.pouls >= 1 && mesure.pouls <=300 && mesure.tsystolique >= 1 && mesure.tdiastolique >= 1) {
                
             this.suiviSanteService
             .modifyMeasurement(this.data.id, this.mesureForm.value);
-            this.mesureForm.reset();
+            
             this.champsTouche = {};
+            this.mesureForm.reset();
             // Émettez un événement pour indiquer que les données ont été ajoutées
             this.suiviSanteService.triggerUpdate();
-
+            this._dialogRef.close(true);
             Swal.fire('Merci !...', 'Mesure Modifier avec succès!', 'success')
-            this.router.navigate(['/','historique']);
+            
               }
           } else {
             
@@ -185,42 +204,43 @@ verifierChamp(champ: string) {
                 // footer: '<a href>Why do I have this issue?</a>'  
               }) 
             }
-            if(mesure.taille < 30 || mesure.taille >250){
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Oops...',  
-                text: 'La taille doit être compris entre 30 à 250 cm ! ',   
+            
+            // if(mesure.taille < 30 || mesure.taille >250){
+            //   Swal.fire({  
+            //     icon: 'error',  
+            //     title: 'Oops...',  
+            //     text: 'La taille doit être compris entre 30 à 250 cm ! ',   
                 
-                // footer: '<a href>Why do I have this issue?</a>'  
-              }) 
-            }
-            if(mesure.poids < 1 || mesure.poids > 300){
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Oops...',  
-                text: 'Le poids doit être compris entre 1 à 300 kg ! ',  
+            //     // footer: '<a href>Why do I have this issue?</a>'  
+            //   }) 
+            // }
+            // if(mesure.poids < 1 || mesure.poids > 300){
+            //   Swal.fire({  
+            //     icon: 'error',  
+            //     title: 'Oops...',  
+            //     text: 'Le poids doit être compris entre 1 à 300 kg ! ',  
                 
-                // footer: '<a href>Why do I have this issue?</a>'  
-              }) 
-            }
-            if(mesure.tsystolique < 1 || mesure.tsystolique > 600){
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Oops...',  
-                text: 'La Tension Systolique doit être compris entre 1 à 600 mmkg ! ',  
+            //     // footer: '<a href>Why do I have this issue?</a>'  
+            //   }) 
+            // }
+            // if(mesure.tsystolique < 1 || mesure.tsystolique > 600){
+            //   Swal.fire({  
+            //     icon: 'error',  
+            //     title: 'Oops...',  
+            //     text: 'La Tension Systolique doit être compris entre 1 à 600 mmkg ! ',  
                 
-                // footer: '<a href>Why do I have this issue?</a>'  
-              }) 
-            }
-            if(mesure.tdiastolique < 1 || mesure.tdiastolique > 600){
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Oops...',  
-                text: 'La Tension Diastolique doit être compris entre 1 à 600 mmkg ! ',  
+            //     // footer: '<a href>Why do I have this issue?</a>'  
+            //   }) 
+            // }
+            // if(mesure.tdiastolique < 1 || mesure.tdiastolique > 600){
+            //   Swal.fire({  
+            //     icon: 'error',  
+            //     title: 'Oops...',  
+            //     text: 'La Tension Diastolique doit être compris entre 1 à 600 mmkg ! ',  
                 
-                // footer: '<a href>Why do I have this issue?</a>'  
-              }) 
-            }
+            //     // footer: '<a href>Why do I have this issue?</a>'  
+            //   }) 
+            // }
             if(mesure.pouls < 1 || mesure.pouls > 300 ){
               Swal.fire({  
                 icon: 'error',  
@@ -231,18 +251,16 @@ verifierChamp(champ: string) {
               }) 
             }
           
-            if (valeur <= this.dt && mesure.poids >=1 && mesure.poids <=300 && mesure.taille >= 30 && mesure.taille <= 250 && mesure.pouls >= 1 && mesure.pouls <=300 && mesure.tsystolique >= 1 && mesure.tsystolique <=600 && mesure.tdiastolique >= 1 && mesure.tdiastolique <=600) {
+            if (valeur <= this.dt && mesure.poids >=1 && mesure.taille >= 1 && mesure.pouls >= 1 && mesure.pouls <=300 && mesure.tsystolique >= 1 && mesure.tdiastolique >= 1 ) {
              
                
               this.suiviSanteService.ajouterMesure(mesure);
-              this.champsTouche = {};
               
               this.mesureForm.reset();
+              this.champsTouche = {};
               // Émettez un événement pour indiquer que les données ont été ajoutées
               this.suiviSanteService.triggerUpdate();
               Swal.fire('Merci !...', 'Mesure Enregistrer avec succès!', 'success')
-              
-             
               
               }
               // this.suiviSanteService.ajouterMesure(mesure);

@@ -104,16 +104,20 @@ getColor() {
   
   
 }
-  OpenDialog(){
-    this._dialog.open(AjoutModifierMesureComponent);
+  OpenDialog(enterAnimationDuration: string, exitAnimationDuration: string){
+    this._dialog.open(AjoutModifierMesureComponent,{enterAnimationDuration,
+      exitAnimationDuration});
   }
 
+  
 
 
-  openEditForm(data: Mesure[]) {
+  openEditForm(data: Mesure[], enterAnimationDuration: string, exitAnimationDuration: string) {
     
-    const dialogRef = this._dialog.open(AjoutModifierMesureComponent, {
-      data,
+    const dialogRef = this._dialog.open(AjoutModifierMesureComponent,  {
+      data, enterAnimationDuration,
+        exitAnimationDuration
+      
     });
 
     
@@ -155,7 +159,7 @@ getColor() {
   confirmBox(i: number){  
     Swal.fire({  
       title: 'Êtes-vous sûr de vouloir supprimer?',  
-      text: 'Vous ne pourrez pas récupérer cette mesure!',  
+      text: 'Vous ne pourriez plus récupérer cette mesure!',  
       icon: 'warning',  
       showCancelButton: true,  
       confirmButtonText: 'Oui, supprimez-le !',  
